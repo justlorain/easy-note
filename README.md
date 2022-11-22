@@ -1,1 +1,1 @@
-# easy-note
+# easy-note (dev version)

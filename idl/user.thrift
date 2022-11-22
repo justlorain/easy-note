@@ -13,8 +13,8 @@ struct User {
 }
 
 struct CreateUserRequest {
-    1: string username (api.form="username")
-    2: string password (api.form="password")
+    1: string username (api.form="username", api.vd="len($) > 0")
+    2: string password (api.form="password", api.vd="len($) > 0")
 }
 
 struct CreateUserResponse {

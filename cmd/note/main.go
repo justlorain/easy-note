@@ -1,7 +1,7 @@
 package main
 
 import (
-	notedemo "easy-note/cmd/note/kitex_gen/notedemo/noteservice"
+	notedemo "easy-note/kitex_gen/notedemo/noteservice"
 	"log"
 )
 

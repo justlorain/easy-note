@@ -1,7 +1,7 @@
 package main
 
 import (
-	userdemo "easy-note/cmd/user/kitex_gen/userdemo/userservice"
+	userdemo "easy-note/kitex_gen/userdemo/userservice"
 	"log"
 )
 

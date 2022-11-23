@@ -4,7 +4,7 @@ package userservice
 
 import (
 	"context"
-	"easy-note/cmd/user/kitex_gen/userdemo"
+	"easy-note/kitex_gen/userdemo"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
 )

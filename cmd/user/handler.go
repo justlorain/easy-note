@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"easy-note/cmd/user/kitex_gen/userdemo"
+	"easy-note/kitex_gen/userdemo"
 )
 
 // UserServiceImpl implements the last service interface defined in the IDL.

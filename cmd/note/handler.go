@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"easy-note/cmd/note/kitex_gen/notedemo"
+	"easy-note/kitex_gen/notedemo"
 )
 
 // NoteServiceImpl implements the last service interface defined in the IDL.

@@ -4,7 +4,7 @@ package noteservice
 
 import (
 	"context"
-	"easy-note/cmd/note/kitex_gen/notedemo"
+	"easy-note/kitex_gen/notedemo"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 )

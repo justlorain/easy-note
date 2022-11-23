@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RUN_NAME="note"
+RUN_NAME="demonote"
 
 mkdir -p output/bin
 cp script/* output/

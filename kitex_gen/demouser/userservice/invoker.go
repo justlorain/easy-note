@@ -3,12 +3,12 @@
 package userservice
 
 import (
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 	server "github.com/cloudwego/kitex/server"
 )
 
 // NewInvoker creates a server.Invoker with the given handler and options.
-func NewInvoker(handler userdemo.UserService, opts ...server.Option) server.Invoker {
+func NewInvoker(handler demouser.UserService, opts ...server.Option) server.Invoker {
 	var options []server.Option
 
 	options = append(options, opts...)

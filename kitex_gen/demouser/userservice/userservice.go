@@ -4,7 +4,7 @@ package userservice
 
 import (
 	"context"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 )
@@ -17,14 +17,14 @@ var userServiceServiceInfo = NewServiceInfo()
 
 func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "UserService"
-	handlerType := (*userdemo.UserService)(nil)
+	handlerType := (*demouser.UserService)(nil)
 	methods := map[string]kitex.MethodInfo{
 		"CreateUser": kitex.NewMethodInfo(createUserHandler, newUserServiceCreateUserArgs, newUserServiceCreateUserResult, false),
 		"MGetUser":   kitex.NewMethodInfo(mGetUserHandler, newUserServiceMGetUserArgs, newUserServiceMGetUserResult, false),
 		"CheckUser":  kitex.NewMethodInfo(checkUserHandler, newUserServiceCheckUserArgs, newUserServiceCheckUserResult, false),
 	}
 	extra := map[string]interface{}{
-		"PackageName": "userdemo",
+		"PackageName": "demouser",
 	}
 	svcInfo := &kitex.ServiceInfo{
 		ServiceName:     serviceName,
@@ -38,9 +38,9 @@ func NewServiceInfo() *kitex.ServiceInfo {
 }
 
 func createUserHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*userdemo.UserServiceCreateUserArgs)
-	realResult := result.(*userdemo.UserServiceCreateUserResult)
-	success, err := handler.(userdemo.UserService).CreateUser(ctx, realArg.Req)
+	realArg := arg.(*demouser.UserServiceCreateUserArgs)
+	realResult := result.(*demouser.UserServiceCreateUserResult)
+	success, err := handler.(demouser.UserService).CreateUser(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -48,17 +48,17 @@ func createUserHandler(ctx context.Context, handler interface{}, arg, result int
 	return nil
 }
 func newUserServiceCreateUserArgs() interface{} {
-	return userdemo.NewUserServiceCreateUserArgs()
+	return demouser.NewUserServiceCreateUserArgs()
 }
 
 func newUserServiceCreateUserResult() interface{} {
-	return userdemo.NewUserServiceCreateUserResult()
+	return demouser.NewUserServiceCreateUserResult()
 }
 
 func mGetUserHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*userdemo.UserServiceMGetUserArgs)
-	realResult := result.(*userdemo.UserServiceMGetUserResult)
-	success, err := handler.(userdemo.UserService).MGetUser(ctx, realArg.Req)
+	realArg := arg.(*demouser.UserServiceMGetUserArgs)
+	realResult := result.(*demouser.UserServiceMGetUserResult)
+	success, err := handler.(demouser.UserService).MGetUser(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -66,17 +66,17 @@ func mGetUserHandler(ctx context.Context, handler interface{}, arg, result inter
 	return nil
 }
 func newUserServiceMGetUserArgs() interface{} {
-	return userdemo.NewUserServiceMGetUserArgs()
+	return demouser.NewUserServiceMGetUserArgs()
 }
 
 func newUserServiceMGetUserResult() interface{} {
-	return userdemo.NewUserServiceMGetUserResult()
+	return demouser.NewUserServiceMGetUserResult()
 }
 
 func checkUserHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*userdemo.UserServiceCheckUserArgs)
-	realResult := result.(*userdemo.UserServiceCheckUserResult)
-	success, err := handler.(userdemo.UserService).CheckUser(ctx, realArg.Req)
+	realArg := arg.(*demouser.UserServiceCheckUserArgs)
+	realResult := result.(*demouser.UserServiceCheckUserResult)
+	success, err := handler.(demouser.UserService).CheckUser(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -84,11 +84,11 @@ func checkUserHandler(ctx context.Context, handler interface{}, arg, result inte
 	return nil
 }
 func newUserServiceCheckUserArgs() interface{} {
-	return userdemo.NewUserServiceCheckUserArgs()
+	return demouser.NewUserServiceCheckUserArgs()
 }
 
 func newUserServiceCheckUserResult() interface{} {
-	return userdemo.NewUserServiceCheckUserResult()
+	return demouser.NewUserServiceCheckUserResult()
 }
 
 type kClient struct {
@@ -101,30 +101,30 @@ func newServiceClient(c client.Client) *kClient {
 	}
 }
 
-func (p *kClient) CreateUser(ctx context.Context, req *userdemo.CreateUserRequest) (r *userdemo.CreateUserResponse, err error) {
-	var _args userdemo.UserServiceCreateUserArgs
+func (p *kClient) CreateUser(ctx context.Context, req *demouser.CreateUserRequest) (r *demouser.CreateUserResponse, err error) {
+	var _args demouser.UserServiceCreateUserArgs
 	_args.Req = req
-	var _result userdemo.UserServiceCreateUserResult
+	var _result demouser.UserServiceCreateUserResult
 	if err = p.c.Call(ctx, "CreateUser", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) MGetUser(ctx context.Context, req *userdemo.MGetUserRequest) (r *userdemo.MGetUserResponse, err error) {
-	var _args userdemo.UserServiceMGetUserArgs
+func (p *kClient) MGetUser(ctx context.Context, req *demouser.MGetUserRequest) (r *demouser.MGetUserResponse, err error) {
+	var _args demouser.UserServiceMGetUserArgs
 	_args.Req = req
-	var _result userdemo.UserServiceMGetUserResult
+	var _result demouser.UserServiceMGetUserResult
 	if err = p.c.Call(ctx, "MGetUser", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) CheckUser(ctx context.Context, req *userdemo.CheckUserRequest) (r *userdemo.CheckUserResponse, err error) {
-	var _args userdemo.UserServiceCheckUserArgs
+func (p *kClient) CheckUser(ctx context.Context, req *demouser.CheckUserRequest) (r *demouser.CheckUserResponse, err error) {
+	var _args demouser.UserServiceCheckUserArgs
 	_args.Req = req
-	var _result userdemo.UserServiceCheckUserResult
+	var _result demouser.UserServiceCheckUserResult
 	if err = p.c.Call(ctx, "CheckUser", &_args, &_result); err != nil {
 		return
 	}

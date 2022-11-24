@@ -2,16 +2,16 @@ package pack
 
 import (
 	"easy-note/cmd/note/dal/db"
-	"easy-note/kitex_gen/notedemo"
+	"easy-note/kitex_gen/demonote"
 )
 
 // Note pack note info
-func Note(m *db.Note) *notedemo.Note {
+func Note(m *db.Note) *demonote.Note {
 	if m == nil {
 		return nil
 	}
 
-	return &notedemo.Note{
+	return &demonote.Note{
 		NoteId:     int64(m.ID),
 		UserId:     m.UserID,
 		Title:      m.Title,
@@ -21,8 +21,8 @@ func Note(m *db.Note) *notedemo.Note {
 }
 
 // Notes pack list of note info
-func Notes(ms []*db.Note) []*notedemo.Note {
-	notes := make([]*notedemo.Note, 0)
+func Notes(ms []*db.Note) []*demonote.Note {
+	notes := make([]*demonote.Note, 0)
 	for _, m := range ms {
 		if n := Note(m); n != nil {
 			notes = append(notes, n)

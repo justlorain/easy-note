@@ -2,10 +2,11 @@ package rpc
 
 import (
 	"context"
-	"easy-note/kitex_gen/userdemo"
-	demouser "easy-note/kitex_gen/userdemo/userservice"
+	"easy-note/kitex_gen/demouser"
+	"easy-note/kitex_gen/demouser/userservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
+	"easy-note/pkg/middleware"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"
 	"github.com/kitex-contrib/registry-nacos/resolver"
@@ -16,20 +17,22 @@ import (
 	"time"
 )
 
-var userClient demouser.Client
+var userClient userservice.Client
 
 func initUserRpc() {
 	cli, err := newNacosRegistryCli()
 	if err != nil {
 		panic(err)
 	}
-	c, err := demouser.NewClient(
+	c, err := userservice.NewClient(
 		consts.UserServiceName,
 		client.WithResolver(resolver.NewNacosResolver(cli)),
 		client.WithMuxConnection(1),
 		client.WithRPCTimeout(3*time.Second),
 		client.WithConnectTimeout(50*time.Millisecond),
 		client.WithFailureRetry(retry.NewFailurePolicy()),
+		client.WithMiddleware(middleware.CommonMiddleware),
+		client.WithInstanceMW(middleware.ClientMiddleware),
 	)
 	if err != nil {
 		panic(err)
@@ -59,7 +62,7 @@ func newNacosRegistryCli() (naming_client.INamingClient, error) {
 }
 
 // MGetUser multiple get list of user info
-func MGetUser(ctx context.Context, req *userdemo.MGetUserRequest) (map[int64]*userdemo.User, error) {
+func MGetUser(ctx context.Context, req *demouser.MGetUserRequest) (map[int64]*demouser.User, error) {
 	resp, err := userClient.MGetUser(ctx, req)
 	if err != nil {
 		return nil, err
@@ -67,7 +70,7 @@ func MGetUser(ctx context.Context, req *userdemo.MGetUserRequest) (map[int64]*us
 	if resp.BaseResp.StatusCode != 0 {
 		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
 	}
-	res := make(map[int64]*userdemo.User)
+	res := make(map[int64]*demouser.User)
 	for _, u := range resp.Users {
 		res[u.UserId] = u
 	}

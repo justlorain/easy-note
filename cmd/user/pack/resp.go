@@ -1,14 +1,14 @@
 package pack
 
 import (
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 	"easy-note/pkg/errno"
 	"errors"
 	"time"
 )
 
 // BuildBaseResp build baseResp from error
-func BuildBaseResp(err error) *userdemo.BaseResp {
+func BuildBaseResp(err error) *demouser.BaseResp {
 	if err == nil {
 		return baseResp(errno.Success)
 	}
@@ -22,6 +22,6 @@ func BuildBaseResp(err error) *userdemo.BaseResp {
 	return baseResp(s)
 }
 
-func baseResp(err errno.ErrNo) *userdemo.BaseResp {
-	return &userdemo.BaseResp{StatusCode: err.ErrCode, StatusMessage: err.ErrMsg, ServiceTime: time.Now().Unix()}
+func baseResp(err errno.ErrNo) *demouser.BaseResp {
+	return &demouser.BaseResp{StatusCode: err.ErrCode, StatusMessage: err.ErrMsg, ServiceTime: time.Now().Unix()}
 }

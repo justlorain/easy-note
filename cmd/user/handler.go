@@ -4,7 +4,7 @@ import (
 	"context"
 	"easy-note/cmd/user/pack"
 	"easy-note/cmd/user/service"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 	"easy-note/pkg/errno"
 )
 
@@ -12,8 +12,8 @@ import (
 type UserServiceImpl struct{}
 
 // CreateUser implements the UserServiceImpl interface.
-func (s *UserServiceImpl) CreateUser(ctx context.Context, req *userdemo.CreateUserRequest) (resp *userdemo.CreateUserResponse, err error) {
-	resp = new(userdemo.CreateUserResponse)
+func (s *UserServiceImpl) CreateUser(ctx context.Context, req *demouser.CreateUserRequest) (resp *demouser.CreateUserResponse, err error) {
+	resp = new(demouser.CreateUserResponse)
 
 	if len(req.Username) == 0 || len(req.Password) == 0 {
 		resp.BaseResp = pack.BuildBaseResp(errno.ParamErr)
@@ -31,8 +31,8 @@ func (s *UserServiceImpl) CreateUser(ctx context.Context, req *userdemo.CreateUs
 }
 
 // MGetUser implements the UserServiceImpl interface.
-func (s *UserServiceImpl) MGetUser(ctx context.Context, req *userdemo.MGetUserRequest) (resp *userdemo.MGetUserResponse, err error) {
-	resp = new(userdemo.MGetUserResponse)
+func (s *UserServiceImpl) MGetUser(ctx context.Context, req *demouser.MGetUserRequest) (resp *demouser.MGetUserResponse, err error) {
+	resp = new(demouser.MGetUserResponse)
 
 	if len(req.UserIds) == 0 {
 		resp.BaseResp = pack.BuildBaseResp(errno.ParamErr)
@@ -51,8 +51,8 @@ func (s *UserServiceImpl) MGetUser(ctx context.Context, req *userdemo.MGetUserRe
 }
 
 // CheckUser implements the UserServiceImpl interface.
-func (s *UserServiceImpl) CheckUser(ctx context.Context, req *userdemo.CheckUserRequest) (resp *userdemo.CheckUserResponse, err error) {
-	resp = new(userdemo.CheckUserResponse)
+func (s *UserServiceImpl) CheckUser(ctx context.Context, req *demouser.CheckUserRequest) (resp *demouser.CheckUserResponse, err error) {
+	resp = new(demouser.CheckUserResponse)
 
 	if len(req.Username) == 0 || len(req.Password) == 0 {
 		resp.BaseResp = pack.BuildBaseResp(errno.ParamErr)

@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/md5"
 	"easy-note/cmd/user/dal/db"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 	"easy-note/pkg/errno"
 	"fmt"
 	"io"
@@ -22,7 +22,7 @@ func NewCheckUserService(ctx context.Context) *CheckUserService {
 }
 
 // CheckUser check user info
-func (s *CheckUserService) CheckUser(req *userdemo.CheckUserRequest) (int64, error) {
+func (s *CheckUserService) CheckUser(req *demouser.CheckUserRequest) (int64, error) {
 	h := md5.New()
 	if _, err := io.WriteString(h, req.Password); err != nil {
 		return 0, err

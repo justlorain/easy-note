@@ -2,8 +2,9 @@ package main
 
 import (
 	"easy-note/cmd/user/dal"
-	demouser "easy-note/kitex_gen/userdemo/userservice"
+	"easy-note/kitex_gen/demouser/userservice"
 	"easy-note/pkg/consts"
+	"easy-note/pkg/middleware"
 	"net"
 
 	"github.com/cloudwego/kitex/pkg/klog"
@@ -31,12 +32,14 @@ func main() {
 		panic(err)
 	}
 	Init()
-	svr := demouser.NewServer(new(UserServiceImpl),
+	svr := userservice.NewServer(new(UserServiceImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.UserServiceName}),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(registry.NewNacosRegistry(cli)),
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}),
 		server.WithMuxTransport(),
+		server.WithMiddleware(middleware.CommonMiddleware),
+		server.WithMiddleware(middleware.ServerMiddleware),
 	)
 	err = svr.Run()
 	if err != nil {

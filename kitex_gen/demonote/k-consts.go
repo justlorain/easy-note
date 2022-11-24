@@ -1,4 +1,4 @@
-package notedemo
+package demonote
 
 // KitexUnusedProtection is used to prevent 'imported and not used' error.
 var KitexUnusedProtection = struct{}{}

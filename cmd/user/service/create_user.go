@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/md5"
 	"easy-note/cmd/user/dal/db"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 	"easy-note/pkg/errno"
 	"fmt"
 	"io"
@@ -20,7 +20,7 @@ func NewCreateUserService(ctx context.Context) *CreateUserService {
 }
 
 // CreateUser create user info.
-func (s *CreateUserService) CreateUser(req *userdemo.CreateUserRequest) error {
+func (s *CreateUserService) CreateUser(req *demouser.CreateUserRequest) error {
 	users, err := db.QueryUser(s.ctx, req.Username)
 	if err != nil {
 		return err

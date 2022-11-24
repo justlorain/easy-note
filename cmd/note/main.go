@@ -3,8 +3,9 @@ package main
 import (
 	"easy-note/cmd/note/dal"
 	"easy-note/cmd/note/rpc"
-	demonote "easy-note/kitex_gen/notedemo/noteservice"
+	demonote "easy-note/kitex_gen/demonote/noteservice"
 	"easy-note/pkg/consts"
+	"easy-note/pkg/middleware"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
@@ -38,6 +39,8 @@ func main() {
 		server.WithRegistry(registry.NewNacosRegistry(cli)),
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}),
 		server.WithMuxTransport(),
+		server.WithMiddleware(middleware.CommonMiddleware),
+		server.WithMiddleware(middleware.ServerMiddleware),
 	)
 	err = svr.Run()
 	if err != nil {

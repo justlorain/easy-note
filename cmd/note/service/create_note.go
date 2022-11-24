@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"easy-note/cmd/note/dal/db"
-	"easy-note/kitex_gen/notedemo"
+	"easy-note/kitex_gen/demonote"
 )
 
 type CreateNoteService struct {
@@ -16,7 +16,7 @@ func NewCreateNoteService(ctx context.Context) *CreateNoteService {
 }
 
 // CreateNote create note info
-func (s *CreateNoteService) CreateNote(req *notedemo.CreateNoteRequest) error {
+func (s *CreateNoteService) CreateNote(req *demonote.CreateNoteRequest) error {
 	noteModel := &db.Note{
 		UserID:  req.UserId,
 		Title:   req.Title,

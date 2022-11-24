@@ -5,8 +5,8 @@ import (
 	"easy-note/cmd/note/dal/db"
 	"easy-note/cmd/note/pack"
 	"easy-note/cmd/note/rpc"
-	"easy-note/kitex_gen/notedemo"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demonote"
+	"easy-note/kitex_gen/demouser"
 )
 
 type QueryNoteService struct {
@@ -19,12 +19,12 @@ func NewQueryNoteService(ctx context.Context) *QueryNoteService {
 }
 
 // QueryNoteService query list of note info
-func (s *QueryNoteService) QueryNoteService(req *notedemo.QueryNoteRequest) ([]*notedemo.Note, int64, error) {
+func (s *QueryNoteService) QueryNoteService(req *demonote.QueryNoteRequest) ([]*demonote.Note, int64, error) {
 	noteModels, total, err := db.QueryNote(s.ctx, req.UserId, req.SearchKey, int(req.Limit), int(req.Offset))
 	if err != nil {
 		return nil, 0, err
 	}
-	userMap, err := rpc.MGetUser(s.ctx, &userdemo.MGetUserRequest{UserIds: []int64{req.UserId}})
+	userMap, err := rpc.MGetUser(s.ctx, &demouser.MGetUserRequest{UserIds: []int64{req.UserId}})
 	if err != nil {
 		return nil, 0, err
 	}

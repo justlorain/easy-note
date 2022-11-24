@@ -4,7 +4,7 @@ import (
 	"context"
 	"easy-note/cmd/user/dal/db"
 	"easy-note/cmd/user/pack"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demouser"
 )
 
 type MGetUserService struct {
@@ -17,7 +17,7 @@ func NewMGetUserService(ctx context.Context) *MGetUserService {
 }
 
 // MGetUser multiple get list of user info
-func (s *MGetUserService) MGetUser(req *userdemo.MGetUserRequest) ([]*userdemo.User, error) {
+func (s *MGetUserService) MGetUser(req *demouser.MGetUserRequest) ([]*demouser.User, error) {
 	modelUsers, err := db.MGetUsers(s.ctx, req.UserIds)
 	if err != nil {
 		return nil, err

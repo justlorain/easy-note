@@ -5,8 +5,8 @@ import (
 	"easy-note/cmd/note/dal/db"
 	"easy-note/cmd/note/pack"
 	"easy-note/cmd/note/rpc"
-	"easy-note/kitex_gen/notedemo"
-	"easy-note/kitex_gen/userdemo"
+	"easy-note/kitex_gen/demonote"
+	"easy-note/kitex_gen/demouser"
 )
 
 type MGetNoteService struct {
@@ -19,13 +19,13 @@ func NewMGetNoteService(ctx context.Context) *MGetNoteService {
 }
 
 // MGetNote multiple get list of note info
-func (s *MGetNoteService) MGetNote(req *notedemo.MGetNoteRequest) ([]*notedemo.Note, error) {
+func (s *MGetNoteService) MGetNote(req *demonote.MGetNoteRequest) ([]*demonote.Note, error) {
 	noteModels, err := db.MGetNotes(s.ctx, req.NoteIds)
 	if err != nil {
 		return nil, err
 	}
 	uIds := pack.UserIds(noteModels)
-	userMap, err := rpc.MGetUser(s.ctx, &userdemo.MGetUserRequest{UserIds: uIds})
+	userMap, err := rpc.MGetUser(s.ctx, &demouser.MGetUserRequest{UserIds: uIds})
 	if err != nil {
 		return nil, err
 	}

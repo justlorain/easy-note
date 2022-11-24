@@ -1,12 +1,10 @@
 package pack
 
 import (
+	"easy-note/kitex_gen/userdemo"
+	"easy-note/pkg/errno"
 	"errors"
 	"time"
-
-	"github.com/cloudwego/kitex-examples/bizdemo/easy_note/pkg/errno"
-
-	"github.com/cloudwego/kitex-examples/bizdemo/easy_note/kitex_gen/userdemo"
 )
 
 // BuildBaseResp build baseResp from error

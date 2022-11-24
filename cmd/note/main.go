@@ -2,6 +2,7 @@ package main
 
 import (
 	"easy-note/cmd/note/dal"
+	"easy-note/cmd/note/rpc"
 	demonote "easy-note/kitex_gen/notedemo/noteservice"
 	"easy-note/pkg/consts"
 	"github.com/cloudwego/kitex/pkg/klog"
@@ -17,6 +18,7 @@ import (
 )
 
 func Init() {
+	rpc.Init()
 	dal.Init()
 }
 
@@ -29,6 +31,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	Init()
 	svr := demonote.NewServer(new(NoteServiceImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteServiceName}),
 		server.WithServiceAddr(addr),

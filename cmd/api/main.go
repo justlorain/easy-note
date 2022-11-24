@@ -3,8 +3,13 @@
 package main
 
 import (
+	"easy-note/cmd/api/rpc"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
+
+func Init() {
+	rpc.Init()
+}
 
 func main() {
 	h := server.Default()

@@ -37,18 +37,26 @@ func initUserRPC() {
 	userClient = c
 }
 
-// MGetUser multiple get list of user info
-func MGetUser(ctx context.Context, req *demouser.MGetUserRequest) (map[int64]*demouser.User, error) {
-	resp, err := userClient.MGetUser(ctx, req)
+// CreateUser create user info
+func CreateUser(ctx context.Context, req *demouser.CreateUserRequest) error {
+	resp, err := userClient.CreateUser(ctx, req)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	if resp.BaseResp.StatusCode != 0 {
-		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
+		return errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
 	}
-	res := make(map[int64]*demouser.User)
-	for _, u := range resp.Users {
-		res[u.UserId] = u
+	return nil
+}
+
+// CheckUser check user info
+func CheckUser(ctx context.Context, req *demouser.CheckUserRequest) (int64, error) {
+	resp, err := userClient.CheckUser(ctx, req)
+	if err != nil {
+		return 0, err
 	}
-	return res, nil
+	if resp.BaseResp.StatusCode != 0 {
+		return 0, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
+	}
+	return resp.UserId, nil
 }

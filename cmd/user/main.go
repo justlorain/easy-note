@@ -5,6 +5,7 @@ import (
 	"easy-note/kitex_gen/demouser/userservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
+	register "easy-note/pkg/registry"
 	"net"
 
 	"github.com/cloudwego/kitex/pkg/klog"
@@ -12,10 +13,6 @@ import (
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/registry-nacos/registry"
-	"github.com/nacos-group/nacos-sdk-go/clients"
-	"github.com/nacos-group/nacos-sdk-go/clients/naming_client"
-	"github.com/nacos-group/nacos-sdk-go/common/constant"
-	"github.com/nacos-group/nacos-sdk-go/vo"
 )
 
 func Init() {
@@ -23,7 +20,7 @@ func Init() {
 }
 
 func main() {
-	cli, err := newNacosRegistryCli()
+	cli, err := register.NewNacosRegistryCli()
 	if err != nil {
 		panic(err)
 	}
@@ -45,25 +42,4 @@ func main() {
 	if err != nil {
 		klog.Fatal(err)
 	}
-}
-
-func newNacosRegistryCli() (naming_client.INamingClient, error) {
-	sc := []constant.ServerConfig{
-		*constant.NewServerConfig(consts.LocalHost, consts.NacosPort),
-	}
-	cc := constant.ClientConfig{
-		NamespaceId:         "public",
-		TimeoutMs:           5000,
-		NotLoadCacheAtStart: true,
-		LogLevel:            "info",
-		Username:            "nacos",
-		Password:            "nacos",
-	}
-	cli, err := clients.NewNamingClient(
-		vo.NacosClientParam{
-			ClientConfig:  &cc,
-			ServerConfigs: sc,
-		},
-	)
-	return cli, err
 }

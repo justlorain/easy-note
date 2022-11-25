@@ -8,6 +8,7 @@ import (
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/utils"
 	constants "github.com/cloudwego/hertz/pkg/protocol/consts"
 	"github.com/hertz-contrib/jwt"
 	"time"
@@ -53,14 +54,14 @@ func InitJWT() {
 			})
 		},
 		LoginResponse: func(ctx context.Context, c *app.RequestContext, code int, token string, expire time.Time) {
-			c.JSON(constants.StatusOK, jwt.MapClaims{
+			c.JSON(constants.StatusOK, utils.H{
 				"code":   errno.SuccessCode,
 				"token":  token,
 				"expire": expire.Format(time.RFC3339),
 			})
 		},
 		Unauthorized: func(ctx context.Context, c *app.RequestContext, code int, message string) {
-			c.JSON(constants.StatusOK, jwt.MapClaims{
+			c.JSON(constants.StatusOK, utils.H{
 				"code":    errno.AuthorizationFailedErrCode,
 				"message": message,
 			})

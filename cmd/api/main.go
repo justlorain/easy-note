@@ -5,6 +5,7 @@ package main
 import (
 	"easy-note/cmd/api/router"
 	"easy-note/cmd/api/rpc"
+
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

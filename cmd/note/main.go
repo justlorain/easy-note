@@ -7,12 +7,13 @@ import (
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
 	register "easy-note/pkg/registry"
+	"net"
+
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/registry-nacos/registry"
-	"net"
 )
 
 func Init() {

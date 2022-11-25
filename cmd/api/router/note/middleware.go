@@ -3,6 +3,7 @@
 package note
 
 import (
+	"easy-note/cmd/api/router"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -18,7 +19,9 @@ func _v2Mw() []app.HandlerFunc {
 
 func _noteMw() []app.HandlerFunc {
 	// your code...
-	return nil
+	return []app.HandlerFunc{
+		router.JwtMiddleware.MiddlewareFunc(),
+	}
 }
 
 func _deletenoteMw() []app.HandlerFunc {

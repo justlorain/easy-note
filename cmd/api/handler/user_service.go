@@ -4,7 +4,10 @@ package handler
 
 import (
 	"context"
-	"easy-note/cmd/api/model"
+	"easy-note/cmd/api/model/user"
+	"easy-note/cmd/api/rpc"
+	"easy-note/kitex_gen/demouser"
+	"easy-note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -12,14 +15,19 @@ import (
 // @router /v2/user/register [POST]
 func CreateUser(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req model.CreateUserRequest
+	var req user.CreateUserRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(400, err.Error())
+		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-
-	resp := new(model.CreateUserResponse)
-
-	c.JSON(200, resp)
+	err = rpc.CreateUser(context.Background(), &demouser.CreateUserRequest{
+		Username: req.Username,
+		Password: req.Password,
+	})
+	if err != nil {
+		SendResponse(c, errno.ConvertErr(err), nil)
+		return
+	}
+	SendResponse(c, errno.Success, nil)
 }

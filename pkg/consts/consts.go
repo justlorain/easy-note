@@ -10,7 +10,7 @@ const (
 	ApiServiceName  = "demoapi"
 	NoteServiceName = "demonote"
 	UserServiceName = "demouser"
-	MySQLDefaultDSN = "gorm:gorm@tcp(localhost:9910)/gorm?charset=utf8&parseTime=True&loc=Local"
+	MySQLDefaultDSN = "gorm:gorm@tcp(localhost:3306)/gorm?charset=utf8&parseTime=True&loc=Local"
 	TCP             = "tcp"
 	LocalHost       = "127.0.0.1"
 	NacosPort       = 8848

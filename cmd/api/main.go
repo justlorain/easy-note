@@ -17,7 +17,7 @@ func Init() {
 func main() {
 	Init()
 	h := server.New(
-		server.WithHostPorts("127.0.0.1:8080"),
+		server.WithHostPorts(":8080"),
 		server.WithHandleMethodNotAllowed(true), // coordinate with NoMethod
 	)
 	register(h)

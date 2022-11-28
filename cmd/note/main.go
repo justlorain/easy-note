@@ -6,7 +6,6 @@ import (
 	"easy-note/kitex_gen/demonote/noteservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
-	register "easy-note/pkg/registry"
 	"net"
 
 	"github.com/cloudwego/kitex/pkg/klog"
@@ -22,7 +21,7 @@ func Init() {
 }
 
 func main() {
-	cli, err := register.NewNacosRegistryCli()
+	r, err := registry.NewDefaultNacosRegistry()
 	if err != nil {
 		panic(err)
 	}
@@ -34,7 +33,7 @@ func main() {
 	svr := noteservice.NewServer(new(NoteServiceImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteServiceName}),
 		server.WithServiceAddr(addr),
-		server.WithRegistry(registry.NewNacosRegistry(cli)),
+		server.WithRegistry(r),
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}),
 		server.WithMuxTransport(),
 		server.WithMiddleware(middleware.CommonMiddleware),

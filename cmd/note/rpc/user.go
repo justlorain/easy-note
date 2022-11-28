@@ -7,7 +7,6 @@ import (
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
 	"easy-note/pkg/middleware"
-	register "easy-note/pkg/registry"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"
 	"github.com/kitex-contrib/registry-nacos/resolver"
@@ -17,13 +16,13 @@ import (
 var userClient userservice.Client
 
 func initUserRPC() {
-	cli, err := register.NewNacosRegistryCli()
+	r, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		panic(err)
 	}
 	c, err := userservice.NewClient(
 		consts.UserServiceName,
-		client.WithResolver(resolver.NewNacosResolver(cli)),
+		client.WithResolver(r),
 		client.WithMuxConnection(1),
 		client.WithRPCTimeout(3*time.Second),
 		client.WithConnectTimeout(50*time.Millisecond),

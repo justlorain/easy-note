@@ -33,9 +33,9 @@ func (s *CreateUserService) CreateUser(req *demouser.CreateUserRequest) error {
 	if _, err = io.WriteString(h, req.Password); err != nil {
 		return err
 	}
-	passWord := fmt.Sprintf("%x", h.Sum(nil))
+	password := fmt.Sprintf("%x", h.Sum(nil))
 	return db.CreateUser(s.ctx, []*db.User{{
 		Username: req.Username,
-		Password: passWord,
+		Password: password,
 	}})
 }

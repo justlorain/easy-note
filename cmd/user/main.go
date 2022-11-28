@@ -5,7 +5,6 @@ import (
 	"easy-note/kitex_gen/demouser/userservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
-	register "easy-note/pkg/registry"
 	"net"
 
 	"github.com/cloudwego/kitex/pkg/klog"
@@ -20,7 +19,7 @@ func Init() {
 }
 
 func main() {
-	cli, err := register.NewNacosRegistryCli()
+	r, err := registry.NewDefaultNacosRegistry()
 	if err != nil {
 		panic(err)
 	}
@@ -32,7 +31,7 @@ func main() {
 	svr := userservice.NewServer(new(UserServiceImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.UserServiceName}),
 		server.WithServiceAddr(addr),
-		server.WithRegistry(registry.NewNacosRegistry(cli)),
+		server.WithRegistry(r),
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}),
 		server.WithMuxTransport(),
 		server.WithMiddleware(middleware.CommonMiddleware),

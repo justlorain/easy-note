@@ -13,7 +13,7 @@ import (
 // register registers all routers.
 func register(r *server.Hertz) {
 
-	r.POST("/v1/user/login", router.JwtMiddleware.LoginHandler)
+	r.POST("/v2/user/login", router.JwtMiddleware.LoginHandler)
 	user.Register(r)
 	note.Register(r)
 	r.NoRoute(func(ctx context.Context, c *app.RequestContext) { // used for HTTP 404

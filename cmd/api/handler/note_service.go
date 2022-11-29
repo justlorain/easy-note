@@ -5,6 +5,7 @@ package handler
 import (
 	"context"
 	"easy-note/cmd/api/model/note"
+	"easy-note/cmd/api/model/user"
 	"easy-note/cmd/api/rpc"
 	"easy-note/kitex_gen/demonote"
 	"easy-note/pkg/consts"
@@ -22,11 +23,11 @@ func CreateNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	userId, _ := c.Get(consts.IdentityKey)
+	v, _ := c.Get(consts.IdentityKey)
 	err = rpc.CreateNote(context.Background(), &demonote.CreateNoteRequest{
 		Title:   req.Title,
 		Content: req.Content,
-		UserId:  userId.(int64),
+		UserId:  v.(*user.User).UserID,
 	})
 	if err != nil {
 		SendResponse(c, errno.ConvertErr(err), nil)
@@ -45,10 +46,10 @@ func DeleteNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	userId, _ := c.Get(consts.IdentityKey)
+	v, _ := c.Get(consts.IdentityKey)
 	err = rpc.DeleteNote(context.Background(), &demonote.DeleteNoteRequest{
 		NoteId: req.NoteID,
-		UserId: userId.(int64),
+		UserId: v.(*user.User).UserID,
 	})
 	if err != nil {
 		SendResponse(c, errno.ConvertErr(err), nil)
@@ -67,10 +68,10 @@ func UpdateNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	userId, _ := c.Get(consts.IdentityKey)
+	v, _ := c.Get(consts.IdentityKey)
 	err = rpc.UpdateNote(context.Background(), &demonote.UpdateNoteRequest{
 		NoteId:  req.NoteID,
-		UserId:  userId.(int64),
+		UserId:  v.(*user.User).UserID,
 		Title:   req.Title,
 		Content: req.Content,
 	})
@@ -91,9 +92,9 @@ func QueryNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	userId, _ := c.Get(consts.IdentityKey)
+	v, _ := c.Get(consts.IdentityKey)
 	notes, total, err := rpc.QueryNotes(context.Background(), &demonote.QueryNoteRequest{
-		UserId:    userId.(int64),
+		UserId:    v.(*user.User).UserID,
 		SearchKey: req.SearchKey,
 		Offset:    req.Offset,
 		Limit:     req.Limit,

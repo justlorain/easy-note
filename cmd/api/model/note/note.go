@@ -1025,7 +1025,7 @@ func (p *CreateNoteResponse) String() string {
 }
 
 type DeleteNoteRequest struct {
-	NoteID int64 `thrift:"note_id,1" json:"note_id" path:"note_id" vd:"len($) > 0"`
+	NoteID int64 `thrift:"note_id,1" json:"note_id" path:"note_id"`
 	UserID int64 `thrift:"user_id,2" form:"user_id" json:"user_id" query:"user_id"`
 }
 
@@ -1353,7 +1353,7 @@ func (p *DeleteNoteResponse) String() string {
 }
 
 type UpdateNoteRequest struct {
-	NoteID  int64   `thrift:"note_id,1" json:"note_id" path:"note_id" vd:"len($) > 0"`
+	NoteID  int64   `thrift:"note_id,1" json:"note_id" path:"note_id"`
 	UserID  int64   `thrift:"user_id,2" form:"user_id" json:"user_id" query:"user_id"`
 	Title   *string `thrift:"title,3,optional" form:"title" json:"title,omitempty" vd:"len($) > 0"`
 	Content *string `thrift:"content,4,optional" form:"content" json:"content,omitempty" vd:"len($) > 0"`

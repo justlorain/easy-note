@@ -27,7 +27,7 @@ struct CreateNoteResponse {
 }
 
 struct DeleteNoteRequest {
-    1: i64 note_id (api.path="note_id", api.vd="len($) > 0")
+    1: i64 note_id (api.path="note_id")
     2: i64 user_id
 }
 
@@ -36,7 +36,7 @@ struct DeleteNoteResponse {
 }
 
 struct UpdateNoteRequest {
-    1: i64 note_id (api.path="note_id", api.vd="len($) > 0")
+    1: i64 note_id (api.path="note_id")
     2: i64 user_id
     3: optional string title (api.form="title", api.vd="len($) > 0")
     4: optional string content (api.form="content", api.vd="len($) > 0")

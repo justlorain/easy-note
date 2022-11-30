@@ -7,21 +7,27 @@ import (
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
 	"easy-note/pkg/middleware"
+	"easy-note/pkg/otel"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"
+	"github.com/cloudwego/kitex/pkg/rpcinfo"
+	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	"github.com/kitex-contrib/registry-nacos/resolver"
 	"time"
 )
 
 var userClient userservice.Client
 
-func initUserRPC() {
+func initUser() {
+	otel.Init(consts.NoteClientName)
 	r, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		panic(err)
 	}
 	c, err := userservice.NewClient(
-		consts.UserServiceName,
+		consts.UserServiceName,                     // DestService
+		client.WithSuite(tracing.NewClientSuite()), // otel
+		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteClientName}), // otel
 		client.WithResolver(r),
 		client.WithMuxConnection(1),
 		client.WithRPCTimeout(3*time.Second),

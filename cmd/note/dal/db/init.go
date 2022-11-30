@@ -24,16 +24,8 @@ func Init() {
 		panic(err)
 	}
 
-	// set tracing and metrics
+	// TODO: set tracing and metrics
 	if err := DB.Use(tracing.NewPlugin()); err != nil {
-		panic(err)
-	}
-
-	m := DB.Migrator()
-	if m.HasTable(&Note{}) {
-		return
-	}
-	if err = m.CreateTable(&Note{}); err != nil {
 		panic(err)
 	}
 }

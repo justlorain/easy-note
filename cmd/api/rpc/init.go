@@ -1,6 +1,6 @@
 package rpc
 
 func Init() {
-	initUserRPC()
-	initNoteRPC()
+	initUser()
+	initNote()
 }

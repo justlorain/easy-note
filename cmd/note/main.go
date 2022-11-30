@@ -6,18 +6,20 @@ import (
 	"easy-note/kitex_gen/demonote/noteservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
-	"net"
-
+	"easy-note/pkg/otel"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
+	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	"github.com/kitex-contrib/registry-nacos/registry"
+	"net"
 )
 
 func Init() {
 	rpc.Init()
 	dal.Init()
+	otel.Init(consts.NoteServiceName)
 }
 
 func main() {
@@ -31,6 +33,7 @@ func main() {
 	}
 	Init()
 	svr := noteservice.NewServer(new(NoteServiceImpl),
+		server.WithSuite(tracing.NewServerSuite()),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteServiceName}),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

@@ -33,9 +33,7 @@ func initUser() {
 	defer p.Shutdown(context.Background())
 
 	c, err := userservice.NewClient(
-		consts.UserServiceName,                     // DestService
-		client.WithSuite(tracing.NewClientSuite()), // otel
-		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteClientName}), // otel
+		consts.UserServiceName, // DestService
 		client.WithResolver(r),
 		client.WithMuxConnection(1),
 		client.WithRPCTimeout(3*time.Second),
@@ -43,6 +41,8 @@ func initUser() {
 		client.WithFailureRetry(retry.NewFailurePolicy()),
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
+		client.WithSuite(tracing.NewClientSuite()),                                                 // otel
+		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteClientName}), // otel
 	)
 	if err != nil {
 		panic(err)

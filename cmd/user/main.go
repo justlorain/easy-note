@@ -40,14 +40,14 @@ func main() {
 	defer p.Shutdown(context.Background())
 
 	svr := userservice.NewServer(new(UserServiceImpl),
-		server.WithSuite(tracing.NewServerSuite()), // otel
-		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.UserServiceName}),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}),
 		server.WithMuxTransport(),
 		server.WithMiddleware(middleware.CommonMiddleware),
 		server.WithMiddleware(middleware.ServerMiddleware),
+		server.WithSuite(tracing.NewServerSuite()), // otel
+		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.UserServiceName}),
 	)
 	err = svr.Run()
 	if err != nil {

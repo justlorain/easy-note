@@ -34,8 +34,6 @@ func initNote() {
 
 	c, err := noteservice.NewClient(
 		consts.NoteServiceName,
-		client.WithSuite(tracing.NewClientSuite()),
-		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.ApiClientName}),
 		client.WithResolver(r),
 		client.WithMuxConnection(1),
 		client.WithRPCTimeout(3*time.Second),
@@ -43,6 +41,8 @@ func initNote() {
 		client.WithFailureRetry(retry.NewFailurePolicy()),
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
+		client.WithSuite(tracing.NewClientSuite()),
+		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.ApiClientName}),
 	)
 	if err != nil {
 		panic(err)

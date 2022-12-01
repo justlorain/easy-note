@@ -13,8 +13,8 @@ const (
 	UserServiceName = "demouser"
 	MySQLDefaultDSN = "gorm:gorm@tcp(localhost:3306)/gorm?charset=utf8&parseTime=True&loc=Local"
 	TCP             = "tcp"
-	UserServiceAddr = "127.0.0.1:9000"
-	NoteServiceAddr = "127.0.0.1:10000"
-	ExportEndpoint  = "127.0.0.1:4317"
+	UserServiceAddr = ":9000"
+	NoteServiceAddr = ":10000"
+	ExportEndpoint  = ":4317"
 	DefaultLimit    = 10
 )

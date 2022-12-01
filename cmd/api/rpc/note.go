@@ -7,10 +7,10 @@ import (
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
 	"easy-note/pkg/middleware"
+	"easy-note/pkg/otel"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	"github.com/kitex-contrib/registry-nacos/resolver"
 	"time"
@@ -19,18 +19,18 @@ import (
 var noteClient noteservice.Client
 
 func initNote() {
-	//otel.Init(consts.ApiClientName)
+	otel.Init(consts.ApiClientName)
 	r, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		panic(err)
 	}
 
-	p := provider.NewOpenTelemetryProvider(
-		provider.WithServiceName(consts.ApiClientName),
-		provider.WithExportEndpoint(consts.ExportEndpoint),
-		provider.WithInsecure(),
-	)
-	defer p.Shutdown(context.Background())
+	//p := provider.NewOpenTelemetryProvider(
+	//	provider.WithServiceName(consts.ApiClientName),
+	//	provider.WithExportEndpoint(consts.ExportEndpoint),
+	//	provider.WithInsecure(),
+	//)
+	//defer p.Shutdown(context.Background())
 
 	c, err := noteservice.NewClient(
 		consts.NoteServiceName,

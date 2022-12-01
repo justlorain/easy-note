@@ -19,19 +19,11 @@ import (
 var userClient userservice.Client
 
 func initUser() {
-	otel.Init(consts.ApiClientName)
+	otel.Init(consts.ApiServiceName)
 	r, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		panic(err)
 	}
-
-	//p := provider.NewOpenTelemetryProvider(
-	//	provider.WithServiceName(consts.ApiClientName),
-	//	provider.WithExportEndpoint(consts.ExportEndpoint),
-	//	provider.WithInsecure(),
-	//)
-	//defer p.Shutdown(context.Background())
-
 	c, err := userservice.NewClient(
 		consts.UserServiceName,
 		client.WithResolver(r),
@@ -42,7 +34,7 @@ func initUser() {
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
 		client.WithSuite(tracing.NewClientSuite()),
-		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.ApiClientName}),
+		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.ApiServiceName}),
 	)
 	if err != nil {
 		panic(err)

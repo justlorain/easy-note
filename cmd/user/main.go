@@ -30,14 +30,6 @@ func main() {
 		panic(err)
 	}
 	Init()
-
-	//p := provider.NewOpenTelemetryProvider(
-	//	provider.WithServiceName(consts.UserServiceName),
-	//	provider.WithExportEndpoint(consts.ExportEndpoint),
-	//	provider.WithInsecure(),
-	//)
-	//defer p.Shutdown(context.Background())
-
 	svr := userservice.NewServer(new(UserServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

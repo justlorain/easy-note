@@ -9,6 +9,7 @@ require (
 	github.com/cloudwego/hertz v0.4.1
 	github.com/cloudwego/kitex v0.4.3
 	github.com/hertz-contrib/jwt v1.0.1
+	github.com/hertz-contrib/obs-opentelemetry/tracing v0.1.1
 	github.com/kitex-contrib/obs-opentelemetry v0.1.0
 	github.com/kitex-contrib/registry-nacos v0.0.1
 	gorm.io/driver/mysql v1.4.4

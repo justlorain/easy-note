@@ -230,6 +230,8 @@ github.com/henrylee2cn/ameda v1.5.1/go.mod h1:wnTERseg26LtcSrHOPlV3pBGnNwQiz3TNI
 github.com/henrylee2cn/goutil v0.0.0-20210127050712-89660552f6f8/go.mod h1:Nhe/DM3671a5udlv2AdV2ni/MZzgfv2qrPL5nIi3EGQ=
 github.com/hertz-contrib/jwt v1.0.1 h1:oULbGKp6M1NPNoSbNArAyWxjJyLkeDAg3d6eTbNCwEo=
 github.com/hertz-contrib/jwt v1.0.1/go.mod h1:3zUSK+44dcw/9z/89JZ+mA0FoyhmVN7Hx+f46ucVV4I=
+github.com/hertz-contrib/obs-opentelemetry/tracing v0.1.1 h1:Ua/ImpcbYt8ohRolat3Ua7BEmeI7V4INRIbFKZJUndc=
+github.com/hertz-contrib/obs-opentelemetry/tracing v0.1.1/go.mod h1:dhvPLrGU5FKUpzv4qYOO4Wgo/D4ldPyw+LwIvcDTKP8=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ianlancetaylor/demangle v0.0.0-20220319035150-800ac71e25c2/go.mod h1:aYm2/VgdVmcIU8iMfdMvDMsRAQjcfZSKFby6HOFvi/w=
 github.com/jhump/protoreflect v1.8.2 h1:k2xE7wcUomeqwY0LDCYA16y4WWfyTcMx5mKhk0d4ua0=

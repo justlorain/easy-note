@@ -5,8 +5,8 @@ package main
 import (
 	"easy-note/cmd/api/router"
 	"easy-note/cmd/api/rpc"
-
 	"github.com/cloudwego/hertz/pkg/app/server"
+	"github.com/hertz-contrib/obs-opentelemetry/tracing"
 )
 
 func Init() {
@@ -16,10 +16,13 @@ func Init() {
 
 func main() {
 	Init()
+	tracer, cfg := tracing.NewServerTracer()
 	h := server.New(
 		server.WithHostPorts(":8080"),
 		server.WithHandleMethodNotAllowed(true), // coordinate with NoMethod
+		tracer,
 	)
+	h.Use(tracing.ServerMiddleware(cfg))
 	register(h)
 	h.Spin()
 }

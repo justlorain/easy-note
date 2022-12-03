@@ -116,7 +116,7 @@ visit `http://127.0.0.1:8848/nacos` on browser, default username and password is
 
 #### Snapshots
 
-![]()
+![nacos](./images/nacos.png)
 
 ### Jaeger
 
@@ -124,7 +124,9 @@ visit `http://127.0.0.1:16686/` on  browser
 
 #### Snapshots
 
-![]()
+![jaeger-tracing](./images/jarger-tracing.png)
+
+![jaeger-architecture](./images/jaeger-architecture.png)
 
 ## API Requests
 

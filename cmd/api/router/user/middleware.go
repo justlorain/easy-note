@@ -10,6 +10,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
 	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
+	"github.com/hertz-contrib/requestid"
 )
 
 func rootMw() []app.HandlerFunc {
@@ -24,6 +25,7 @@ func rootMw() []app.HandlerFunc {
 				})
 			},
 		)),
+		requestid.New(),
 	}
 }
 

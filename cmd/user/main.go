@@ -1,15 +1,16 @@
 package main
 
 import (
+	"context"
 	"easy-note/cmd/user/dal"
 	"easy-note/kitex_gen/demouser/userservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
-	"easy-note/pkg/otel"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
+	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	"github.com/kitex-contrib/registry-nacos/registry"
 	"net"
@@ -17,7 +18,7 @@ import (
 
 func Init() {
 	dal.Init()
-	otel.Init(consts.UserServiceName)
+	//otel.Init(consts.UserServiceName)
 }
 
 func main() {
@@ -30,6 +31,14 @@ func main() {
 		panic(err)
 	}
 	Init()
+
+	p := provider.NewOpenTelemetryProvider(
+		provider.WithServiceName(consts.UserServiceName),
+		provider.WithExportEndpoint(consts.ExportEndpoint),
+		provider.WithInsecure(),
+	)
+	defer p.Shutdown(context.Background())
+
 	svr := userservice.NewServer(new(UserServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

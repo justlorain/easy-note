@@ -1,16 +1,17 @@
 package main
 
 import (
+	"context"
 	"easy-note/cmd/note/dal"
 	"easy-note/cmd/note/rpc"
 	"easy-note/kitex_gen/demonote/noteservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/middleware"
-	"easy-note/pkg/otel"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
+	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	"github.com/kitex-contrib/registry-nacos/registry"
 	"net"
@@ -19,7 +20,7 @@ import (
 func Init() {
 	rpc.Init()
 	dal.Init()
-	otel.Init(consts.NoteServiceName)
+	//otel.Init(consts.NoteServiceName)
 }
 
 func main() {
@@ -32,6 +33,14 @@ func main() {
 		panic(err)
 	}
 	Init()
+
+	p := provider.NewOpenTelemetryProvider(
+		provider.WithServiceName(consts.NoteServiceName),
+		provider.WithExportEndpoint(consts.ExportEndpoint),
+		provider.WithInsecure(),
+	)
+	defer p.Shutdown(context.Background())
+
 	svr := noteservice.NewServer(new(NoteServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

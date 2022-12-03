@@ -25,12 +25,12 @@ func initUser() {
 		panic(err)
 	}
 
-	p := provider.NewOpenTelemetryProvider(
+	provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.NoteServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
-	defer p.Shutdown(context.Background())
+	//defer p.Shutdown(context.Background())
 
 	c, err := userservice.NewClient(
 		consts.UserServiceName, // DestService

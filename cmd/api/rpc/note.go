@@ -25,12 +25,12 @@ func initNote() {
 		panic(err)
 	}
 
-	p := provider.NewOpenTelemetryProvider(
+	provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.ApiServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
-	defer p.Shutdown(context.Background())
+	//defer p.Shutdown(context.Background())
 
 	c, err := noteservice.NewClient(
 		consts.NoteServiceName,

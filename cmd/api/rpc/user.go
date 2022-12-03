@@ -19,19 +19,15 @@ import (
 var userClient userservice.Client
 
 func initUser() {
-	//otel.Init(consts.ApiServiceName)
 	r, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		panic(err)
 	}
-
 	provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.ApiServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
-	//defer p.Shutdown(context.Background())
-
 	c, err := userservice.NewClient(
 		consts.UserServiceName,
 		client.WithResolver(r),

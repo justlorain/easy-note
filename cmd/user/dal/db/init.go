@@ -16,15 +16,12 @@ func Init() {
 	DB, err = gorm.Open(mysql.Open(consts.MySQLDefaultDSN),
 		&gorm.Config{
 			PrepareStmt: true,
-			// use transaction
-			Logger: logger.Default.LogMode(logger.Info),
+			Logger:      logger.Default.LogMode(logger.Info),
 		},
 	)
 	if err != nil {
 		panic(err)
 	}
-
-	// TODO: set tracing and metrics
 	if err := DB.Use(tracing.NewPlugin()); err != nil {
 		panic(err)
 	}

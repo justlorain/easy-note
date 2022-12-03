@@ -20,7 +20,6 @@ import (
 func Init() {
 	rpc.Init()
 	dal.Init()
-	//otel.Init(consts.NoteServiceName)
 }
 
 func main() {
@@ -33,14 +32,12 @@ func main() {
 		panic(err)
 	}
 	Init()
-
 	p := provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.NoteServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
 	defer p.Shutdown(context.Background())
-
 	svr := noteservice.NewServer(new(NoteServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

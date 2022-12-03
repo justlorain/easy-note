@@ -19,19 +19,15 @@ import (
 var noteClient noteservice.Client
 
 func initNote() {
-	//otel.Init(consts.ApiServiceName)
 	r, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		panic(err)
 	}
-
 	provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.ApiServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
-	//defer p.Shutdown(context.Background())
-
 	c, err := noteservice.NewClient(
 		consts.NoteServiceName,
 		client.WithResolver(r),

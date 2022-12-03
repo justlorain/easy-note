@@ -18,7 +18,6 @@ import (
 
 func Init() {
 	dal.Init()
-	//otel.Init(consts.UserServiceName)
 }
 
 func main() {
@@ -31,14 +30,12 @@ func main() {
 		panic(err)
 	}
 	Init()
-
 	p := provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.UserServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
 	defer p.Shutdown(context.Background())
-
 	svr := userservice.NewServer(new(UserServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),
@@ -46,7 +43,7 @@ func main() {
 		server.WithMuxTransport(),
 		server.WithMiddleware(middleware.CommonMiddleware),
 		server.WithMiddleware(middleware.ServerMiddleware),
-		server.WithSuite(tracing.NewServerSuite()), // otel
+		server.WithSuite(tracing.NewServerSuite()),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.UserServiceName}),
 	)
 	err = svr.Run()

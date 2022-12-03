@@ -32,7 +32,6 @@ func InitJWT() {
 			}
 		},
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
-			// data 数据是在 Authenticator 认证通过后的返回值，也就是这个时候设置进去的，详情见 jwt.LoginHandler
 			if v, ok := data.(int64); ok {
 				return jwt.MapClaims{
 					consts.IdentityKey: v,

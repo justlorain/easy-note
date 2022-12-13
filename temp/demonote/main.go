@@ -1,12 +1,12 @@
 package main
 
 import (
-	notedemo "easy-note/temp/demonote/kitex_gen/notedemo/noteservice"
+	demonote "easy-note/temp/demonote/kitex_gen/demonote/noteservice"
 	"log"
 )
 
 func main() {
-	svr := notedemo.NewServer(new(NoteServiceImpl))
+	svr := demonote.NewServer(new(NoteServiceImpl))
 
 	err := svr.Run()
 

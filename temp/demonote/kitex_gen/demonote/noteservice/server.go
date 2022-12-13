@@ -2,12 +2,12 @@
 package noteservice
 
 import (
-	notedemo "easy-note/temp/demonote/kitex_gen/notedemo"
+	demonote "easy-note/temp/demonote/kitex_gen/demonote"
 	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.
-func NewServer(handler notedemo.NoteService, opts ...server.Option) server.Server {
+func NewServer(handler demonote.NoteService, opts ...server.Option) server.Server {
 	var options []server.Option
 
 	options = append(options, opts...)

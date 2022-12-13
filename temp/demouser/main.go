@@ -1,12 +1,12 @@
 package main
 
 import (
-	userdemo "easy-note/temp/demouser/kitex_gen/userdemo/userservice"
+	demouser "easy-note/temp/demouser/kitex_gen/demouser/userservice"
 	"log"
 )
 
 func main() {
-	svr := userdemo.NewServer(new(UserServiceImpl))
+	svr := demouser.NewServer(new(UserServiceImpl))
 
 	err := svr.Run()
 

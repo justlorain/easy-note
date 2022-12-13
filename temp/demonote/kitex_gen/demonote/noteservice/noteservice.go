@@ -4,7 +4,7 @@ package noteservice
 
 import (
 	"context"
-	notedemo "easy-note/temp/demonote/kitex_gen/notedemo"
+	demonote "easy-note/temp/demonote/kitex_gen/demonote"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 )
@@ -17,7 +17,7 @@ var noteServiceServiceInfo = NewServiceInfo()
 
 func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "NoteService"
-	handlerType := (*notedemo.NoteService)(nil)
+	handlerType := (*demonote.NoteService)(nil)
 	methods := map[string]kitex.MethodInfo{
 		"CreateNote": kitex.NewMethodInfo(createNoteHandler, newNoteServiceCreateNoteArgs, newNoteServiceCreateNoteResult, false),
 		"DeleteNote": kitex.NewMethodInfo(deleteNoteHandler, newNoteServiceDeleteNoteArgs, newNoteServiceDeleteNoteResult, false),
@@ -26,7 +26,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"MGetNote":   kitex.NewMethodInfo(mGetNoteHandler, newNoteServiceMGetNoteArgs, newNoteServiceMGetNoteResult, false),
 	}
 	extra := map[string]interface{}{
-		"PackageName": "notedemo",
+		"PackageName": "demonote",
 	}
 	svcInfo := &kitex.ServiceInfo{
 		ServiceName:     serviceName,
@@ -40,9 +40,9 @@ func NewServiceInfo() *kitex.ServiceInfo {
 }
 
 func createNoteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*notedemo.NoteServiceCreateNoteArgs)
-	realResult := result.(*notedemo.NoteServiceCreateNoteResult)
-	success, err := handler.(notedemo.NoteService).CreateNote(ctx, realArg.Req)
+	realArg := arg.(*demonote.NoteServiceCreateNoteArgs)
+	realResult := result.(*demonote.NoteServiceCreateNoteResult)
+	success, err := handler.(demonote.NoteService).CreateNote(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -50,17 +50,17 @@ func createNoteHandler(ctx context.Context, handler interface{}, arg, result int
 	return nil
 }
 func newNoteServiceCreateNoteArgs() interface{} {
-	return notedemo.NewNoteServiceCreateNoteArgs()
+	return demonote.NewNoteServiceCreateNoteArgs()
 }
 
 func newNoteServiceCreateNoteResult() interface{} {
-	return notedemo.NewNoteServiceCreateNoteResult()
+	return demonote.NewNoteServiceCreateNoteResult()
 }
 
 func deleteNoteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*notedemo.NoteServiceDeleteNoteArgs)
-	realResult := result.(*notedemo.NoteServiceDeleteNoteResult)
-	success, err := handler.(notedemo.NoteService).DeleteNote(ctx, realArg.Req)
+	realArg := arg.(*demonote.NoteServiceDeleteNoteArgs)
+	realResult := result.(*demonote.NoteServiceDeleteNoteResult)
+	success, err := handler.(demonote.NoteService).DeleteNote(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -68,17 +68,17 @@ func deleteNoteHandler(ctx context.Context, handler interface{}, arg, result int
 	return nil
 }
 func newNoteServiceDeleteNoteArgs() interface{} {
-	return notedemo.NewNoteServiceDeleteNoteArgs()
+	return demonote.NewNoteServiceDeleteNoteArgs()
 }
 
 func newNoteServiceDeleteNoteResult() interface{} {
-	return notedemo.NewNoteServiceDeleteNoteResult()
+	return demonote.NewNoteServiceDeleteNoteResult()
 }
 
 func updateNoteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*notedemo.NoteServiceUpdateNoteArgs)
-	realResult := result.(*notedemo.NoteServiceUpdateNoteResult)
-	success, err := handler.(notedemo.NoteService).UpdateNote(ctx, realArg.Req)
+	realArg := arg.(*demonote.NoteServiceUpdateNoteArgs)
+	realResult := result.(*demonote.NoteServiceUpdateNoteResult)
+	success, err := handler.(demonote.NoteService).UpdateNote(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -86,17 +86,17 @@ func updateNoteHandler(ctx context.Context, handler interface{}, arg, result int
 	return nil
 }
 func newNoteServiceUpdateNoteArgs() interface{} {
-	return notedemo.NewNoteServiceUpdateNoteArgs()
+	return demonote.NewNoteServiceUpdateNoteArgs()
 }
 
 func newNoteServiceUpdateNoteResult() interface{} {
-	return notedemo.NewNoteServiceUpdateNoteResult()
+	return demonote.NewNoteServiceUpdateNoteResult()
 }
 
 func queryNoteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*notedemo.NoteServiceQueryNoteArgs)
-	realResult := result.(*notedemo.NoteServiceQueryNoteResult)
-	success, err := handler.(notedemo.NoteService).QueryNote(ctx, realArg.Req)
+	realArg := arg.(*demonote.NoteServiceQueryNoteArgs)
+	realResult := result.(*demonote.NoteServiceQueryNoteResult)
+	success, err := handler.(demonote.NoteService).QueryNote(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -104,17 +104,17 @@ func queryNoteHandler(ctx context.Context, handler interface{}, arg, result inte
 	return nil
 }
 func newNoteServiceQueryNoteArgs() interface{} {
-	return notedemo.NewNoteServiceQueryNoteArgs()
+	return demonote.NewNoteServiceQueryNoteArgs()
 }
 
 func newNoteServiceQueryNoteResult() interface{} {
-	return notedemo.NewNoteServiceQueryNoteResult()
+	return demonote.NewNoteServiceQueryNoteResult()
 }
 
 func mGetNoteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*notedemo.NoteServiceMGetNoteArgs)
-	realResult := result.(*notedemo.NoteServiceMGetNoteResult)
-	success, err := handler.(notedemo.NoteService).MGetNote(ctx, realArg.Req)
+	realArg := arg.(*demonote.NoteServiceMGetNoteArgs)
+	realResult := result.(*demonote.NoteServiceMGetNoteResult)
+	success, err := handler.(demonote.NoteService).MGetNote(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
@@ -122,11 +122,11 @@ func mGetNoteHandler(ctx context.Context, handler interface{}, arg, result inter
 	return nil
 }
 func newNoteServiceMGetNoteArgs() interface{} {
-	return notedemo.NewNoteServiceMGetNoteArgs()
+	return demonote.NewNoteServiceMGetNoteArgs()
 }
 
 func newNoteServiceMGetNoteResult() interface{} {
-	return notedemo.NewNoteServiceMGetNoteResult()
+	return demonote.NewNoteServiceMGetNoteResult()
 }
 
 type kClient struct {
@@ -139,50 +139,50 @@ func newServiceClient(c client.Client) *kClient {
 	}
 }
 
-func (p *kClient) CreateNote(ctx context.Context, req *notedemo.CreateNoteRequest) (r *notedemo.CreateNoteResponse, err error) {
-	var _args notedemo.NoteServiceCreateNoteArgs
+func (p *kClient) CreateNote(ctx context.Context, req *demonote.CreateNoteRequest) (r *demonote.CreateNoteResponse, err error) {
+	var _args demonote.NoteServiceCreateNoteArgs
 	_args.Req = req
-	var _result notedemo.NoteServiceCreateNoteResult
+	var _result demonote.NoteServiceCreateNoteResult
 	if err = p.c.Call(ctx, "CreateNote", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) DeleteNote(ctx context.Context, req *notedemo.DeleteNoteRequest) (r *notedemo.DeleteNoteResponse, err error) {
-	var _args notedemo.NoteServiceDeleteNoteArgs
+func (p *kClient) DeleteNote(ctx context.Context, req *demonote.DeleteNoteRequest) (r *demonote.DeleteNoteResponse, err error) {
+	var _args demonote.NoteServiceDeleteNoteArgs
 	_args.Req = req
-	var _result notedemo.NoteServiceDeleteNoteResult
+	var _result demonote.NoteServiceDeleteNoteResult
 	if err = p.c.Call(ctx, "DeleteNote", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdateNote(ctx context.Context, req *notedemo.UpdateNoteRequest) (r *notedemo.UpdateNoteResponse, err error) {
-	var _args notedemo.NoteServiceUpdateNoteArgs
+func (p *kClient) UpdateNote(ctx context.Context, req *demonote.UpdateNoteRequest) (r *demonote.UpdateNoteResponse, err error) {
+	var _args demonote.NoteServiceUpdateNoteArgs
 	_args.Req = req
-	var _result notedemo.NoteServiceUpdateNoteResult
+	var _result demonote.NoteServiceUpdateNoteResult
 	if err = p.c.Call(ctx, "UpdateNote", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) QueryNote(ctx context.Context, req *notedemo.QueryNoteRequest) (r *notedemo.QueryNoteResponse, err error) {
-	var _args notedemo.NoteServiceQueryNoteArgs
+func (p *kClient) QueryNote(ctx context.Context, req *demonote.QueryNoteRequest) (r *demonote.QueryNoteResponse, err error) {
+	var _args demonote.NoteServiceQueryNoteArgs
 	_args.Req = req
-	var _result notedemo.NoteServiceQueryNoteResult
+	var _result demonote.NoteServiceQueryNoteResult
 	if err = p.c.Call(ctx, "QueryNote", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) MGetNote(ctx context.Context, req *notedemo.MGetNoteRequest) (r *notedemo.MGetNoteResponse, err error) {
-	var _args notedemo.NoteServiceMGetNoteArgs
+func (p *kClient) MGetNote(ctx context.Context, req *demonote.MGetNoteRequest) (r *demonote.MGetNoteResponse, err error) {
+	var _args demonote.NoteServiceMGetNoteArgs
 	_args.Req = req
-	var _result notedemo.NoteServiceMGetNoteResult
+	var _result demonote.NoteServiceMGetNoteResult
 	if err = p.c.Call(ctx, "MGetNote", &_args, &_result); err != nil {
 		return
 	}

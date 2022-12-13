@@ -4,16 +4,16 @@ package userservice
 
 import (
 	"context"
-	userdemo "easy-note/temp/demouser/kitex_gen/userdemo"
+	demouser "easy-note/temp/demouser/kitex_gen/demouser"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
-	CreateUser(ctx context.Context, req *userdemo.CreateUserRequest, callOptions ...callopt.Option) (r *userdemo.CreateUserResponse, err error)
-	MGetUser(ctx context.Context, req *userdemo.MGetUserRequest, callOptions ...callopt.Option) (r *userdemo.MGetUserResponse, err error)
-	CheckUser(ctx context.Context, req *userdemo.CheckUserRequest, callOptions ...callopt.Option) (r *userdemo.CheckUserResponse, err error)
+	CreateUser(ctx context.Context, req *demouser.CreateUserRequest, callOptions ...callopt.Option) (r *demouser.CreateUserResponse, err error)
+	MGetUser(ctx context.Context, req *demouser.MGetUserRequest, callOptions ...callopt.Option) (r *demouser.MGetUserResponse, err error)
+	CheckUser(ctx context.Context, req *demouser.CheckUserRequest, callOptions ...callopt.Option) (r *demouser.CheckUserResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -45,17 +45,17 @@ type kUserServiceClient struct {
 	*kClient
 }
 
-func (p *kUserServiceClient) CreateUser(ctx context.Context, req *userdemo.CreateUserRequest, callOptions ...callopt.Option) (r *userdemo.CreateUserResponse, err error) {
+func (p *kUserServiceClient) CreateUser(ctx context.Context, req *demouser.CreateUserRequest, callOptions ...callopt.Option) (r *demouser.CreateUserResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CreateUser(ctx, req)
 }
 
-func (p *kUserServiceClient) MGetUser(ctx context.Context, req *userdemo.MGetUserRequest, callOptions ...callopt.Option) (r *userdemo.MGetUserResponse, err error) {
+func (p *kUserServiceClient) MGetUser(ctx context.Context, req *demouser.MGetUserRequest, callOptions ...callopt.Option) (r *demouser.MGetUserResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.MGetUser(ctx, req)
 }
 
-func (p *kUserServiceClient) CheckUser(ctx context.Context, req *userdemo.CheckUserRequest, callOptions ...callopt.Option) (r *userdemo.CheckUserResponse, err error) {
+func (p *kUserServiceClient) CheckUser(ctx context.Context, req *demouser.CheckUserRequest, callOptions ...callopt.Option) (r *demouser.CheckUserResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CheckUser(ctx, req)
 }

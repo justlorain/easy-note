@@ -13,7 +13,7 @@ import (
 
 // CreateUser .
 // @router /v2/user/register [POST]
-func CreateUser(ctx context.Context, c *app.RequestContext) {
+func CreateUser(_ context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.CreateUserRequest
 	err = c.BindAndValidate(&req)

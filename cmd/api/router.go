@@ -5,10 +5,11 @@ package main
 import (
 	"context"
 	"easy-note/cmd/api/biz/handler"
+	"easy-note/cmd/api/biz/handler/demoapi"
 	"easy-note/cmd/api/biz/mw"
+	"easy-note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
-	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
 
 // customizeRegister registers customize routers.
@@ -18,9 +19,9 @@ func customizedRegister(r *server.Hertz) {
 	// your code ...
 	r.POST("/v2/user/login", mw.JwtMiddleware.LoginHandler)
 	r.NoRoute(func(ctx context.Context, c *app.RequestContext) { // used for HTTP 404
-		c.String(consts.StatusOK, "no route")
+		demoapi.SendResponse(c, errno.ServiceErr, nil)
 	})
 	r.NoMethod(func(ctx context.Context, c *app.RequestContext) { // used for HTTP 405
-		c.String(consts.StatusOK, "no method")
+		demoapi.SendResponse(c, errno.ServiceErr, nil)
 	})
 }

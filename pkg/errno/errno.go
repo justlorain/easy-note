@@ -1,16 +1,9 @@
 package errno
 
 import (
+	"easy-note/kitex_gen/demouser"
 	"errors"
 	"fmt"
-)
-
-const (
-	SuccessCode                = 0
-	ServiceErrCode             = 10001
-	ParamErrCode               = 10002
-	UserAlreadyExistErrCode    = 10003
-	AuthorizationFailedErrCode = 10004
 )
 
 type ErrNo struct {
@@ -23,7 +16,10 @@ func (e ErrNo) Error() string {
 }
 
 func NewErrNo(code int64, msg string) ErrNo {
-	return ErrNo{code, msg}
+	return ErrNo{
+		ErrCode: code,
+		ErrMsg:  msg,
+	}
 }
 
 func (e ErrNo) WithMessage(msg string) ErrNo {
@@ -32,11 +28,11 @@ func (e ErrNo) WithMessage(msg string) ErrNo {
 }
 
 var (
-	Success                = NewErrNo(SuccessCode, "Success")
-	ServiceErr             = NewErrNo(ServiceErrCode, "Service is unable to start successfully")
-	ParamErr               = NewErrNo(ParamErrCode, "Wrong Parameter has been given")
-	UserAlreadyExistErr    = NewErrNo(UserAlreadyExistErrCode, "User already exists")
-	AuthorizationFailedErr = NewErrNo(AuthorizationFailedErrCode, "Authorization failed")
+	Success                = NewErrNo(int64(demouser.ErrCode_SuccessCode), "Success")
+	ServiceErr             = NewErrNo(int64(demouser.ErrCode_ServiceErrCode), "Service is unable to start successfully")
+	ParamErr               = NewErrNo(int64(demouser.ErrCode_ParamErrCode), "Wrong Parameter has been given")
+	UserAlreadyExistErr    = NewErrNo(int64(demouser.ErrCode_UserAlreadyExistErrCode), "User already exists")
+	AuthorizationFailedErr = NewErrNo(int64(demouser.ErrCode_AuthorizationFailedErrCode), "Authorization failed")
 )
 
 // ConvertErr convert error to Errno

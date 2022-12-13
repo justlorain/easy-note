@@ -8,12 +8,10 @@ import (
 	"easy-note/pkg/errno"
 	"easy-note/pkg/middleware"
 	"github.com/cloudwego/kitex/client"
-	"github.com/cloudwego/kitex/pkg/retry"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	"github.com/kitex-contrib/registry-nacos/resolver"
-	"time"
 )
 
 var userClient userservice.Client
@@ -32,9 +30,6 @@ func initUser() {
 		consts.UserServiceName, // DestService
 		client.WithResolver(r),
 		client.WithMuxConnection(1),
-		client.WithRPCTimeout(3*time.Second),
-		client.WithConnectTimeout(50*time.Millisecond),
-		client.WithFailureRetry(retry.NewFailurePolicy()),
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
 		client.WithSuite(tracing.NewClientSuite()),

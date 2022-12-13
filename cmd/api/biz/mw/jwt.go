@@ -55,14 +55,14 @@ func InitJWT() {
 		},
 		LoginResponse: func(ctx context.Context, c *app.RequestContext, code int, token string, expire time.Time) {
 			c.JSON(constants.StatusOK, utils.H{
-				"code":   errno.SuccessCode,
+				"code":   errno.Success.ErrCode,
 				"token":  token,
 				"expire": expire.Format(time.RFC3339),
 			})
 		},
 		Unauthorized: func(ctx context.Context, c *app.RequestContext, code int, message string) {
 			c.JSON(constants.StatusOK, utils.H{
-				"code":    errno.AuthorizationFailedErrCode,
+				"code":    errno.AuthorizationFailedErr.ErrCode,
 				"message": message,
 			})
 		},

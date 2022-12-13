@@ -10,11 +10,12 @@ import (
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/utils"
 )
 
 // CreateNote .
 // @router /v2/note [POST]
-func CreateNote(ctx context.Context, c *app.RequestContext) {
+func CreateNote(_ context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.CreateNoteRequest
 	err = c.BindAndValidate(&req)
@@ -37,7 +38,7 @@ func CreateNote(ctx context.Context, c *app.RequestContext) {
 
 // QueryNote .
 // @router /v2/note/query [GET]
-func QueryNote(ctx context.Context, c *app.RequestContext) {
+func QueryNote(_ context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.QueryNoteRequest
 	err = c.BindAndValidate(&req)
@@ -56,7 +57,7 @@ func QueryNote(ctx context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	SendResponse(c, errno.Success, map[string]interface{}{
+	SendResponse(c, errno.Success, utils.H{
 		consts.Total: total,
 		consts.Notes: notes,
 	})
@@ -64,7 +65,7 @@ func QueryNote(ctx context.Context, c *app.RequestContext) {
 
 // UpdateNote .
 // @router /v2/note/:note_id [PUT]
-func UpdateNote(ctx context.Context, c *app.RequestContext) {
+func UpdateNote(_ context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.UpdateNoteRequest
 	err = c.BindAndValidate(&req)
@@ -88,7 +89,7 @@ func UpdateNote(ctx context.Context, c *app.RequestContext) {
 
 // DeleteNote .
 // @router /v2/note/:note_id [DELETE]
-func DeleteNote(ctx context.Context, c *app.RequestContext) {
+func DeleteNote(_ context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.DeleteNoteRequest
 	err = c.BindAndValidate(&req)

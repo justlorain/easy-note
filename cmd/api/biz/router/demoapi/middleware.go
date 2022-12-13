@@ -18,7 +18,7 @@ import (
 func rootMw() []app.HandlerFunc {
 	// your code...
 	return []app.HandlerFunc{
-		// use recovery middleware
+		// use recovery mw
 		recovery.Recovery(recovery.WithRecoveryHandler(
 			func(ctx context.Context, c *app.RequestContext, err interface{}, stack []byte) {
 				hlog.SystemLogger().CtxErrorf(ctx, "[Recovery] err=%v\nstack=%s", err, stack)
@@ -28,7 +28,7 @@ func rootMw() []app.HandlerFunc {
 				})
 			},
 		)),
-		// use requestid middleware
+		// use requestid mw
 		requestid.New(),
 	}
 }
@@ -41,7 +41,7 @@ func _v2Mw() []app.HandlerFunc {
 func _noteMw() []app.HandlerFunc {
 	// your code...
 	return []app.HandlerFunc{
-		// use jwt middleware
+		// use jwt mw
 		mw.JwtMiddleware.MiddlewareFunc(),
 	}
 }

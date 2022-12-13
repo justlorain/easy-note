@@ -6,7 +6,7 @@ import (
 	"easy-note/cmd/note/rpc"
 	"easy-note/kitex_gen/demonote/noteservice"
 	"easy-note/pkg/consts"
-	"easy-note/pkg/middleware"
+	"easy-note/pkg/mw"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
@@ -43,8 +43,8 @@ func main() {
 		server.WithRegistry(r),
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}),
 		server.WithMuxTransport(),
-		server.WithMiddleware(middleware.CommonMiddleware),
-		server.WithMiddleware(middleware.ServerMiddleware),
+		server.WithMiddleware(mw.CommonMiddleware),
+		server.WithMiddleware(mw.ServerMiddleware),
 		server.WithSuite(tracing.NewServerSuite()),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.NoteServiceName}),
 	)

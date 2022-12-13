@@ -6,7 +6,7 @@ import (
 	"easy-note/kitex_gen/demouser/userservice"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
-	"easy-note/pkg/middleware"
+	"easy-note/pkg/mw"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
@@ -30,8 +30,8 @@ func initUser() {
 		consts.UserServiceName,
 		client.WithResolver(r),
 		client.WithMuxConnection(1),
-		client.WithMiddleware(middleware.CommonMiddleware),
-		client.WithInstanceMW(middleware.ClientMiddleware),
+		client.WithMiddleware(mw.CommonMiddleware),
+		client.WithInstanceMW(mw.ClientMiddleware),
 		client.WithSuite(tracing.NewClientSuite()),
 		client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: consts.ApiServiceName}),
 	)

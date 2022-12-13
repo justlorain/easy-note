@@ -67,17 +67,17 @@ req    resp                            │                                   res
 
 ### Catalog Introduce
 
-| catalog        | introduce               |
-|----------------|-------------------------|
-| handler        | HTTP handler            |
-| service        | business logic          |
-| rpc            | RPC call logic          |
-| dal            | DB operation            |
-| pack           | data pack               |
-| pkg/middleware | RPC middleware          |
-| pkg/consts     | constants               |
-| pkg/errno      | customized error number |
-| pkg/configs    | SQL and Tracing configs |
+| catalog     | introduce               |
+|-------------|-------------------------|
+| handler     | HTTP handler            |
+| service     | business logic          |
+| rpc         | RPC call logic          |
+| dal         | DB operation            |
+| pack        | data pack               |
+| pkg/mw      | RPC middleware          |
+| pkg/consts  | constants               |
+| pkg/errno   | customized error number |
+| pkg/configs | SQL and Tracing configs |
 
 ## Quick Start
 

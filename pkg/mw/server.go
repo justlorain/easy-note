@@ -1,4 +1,4 @@
-package middleware
+package mw
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 
 var _ endpoint.Middleware = ServerMiddleware
 
-// ServerMiddleware server middleware print client address
+// ServerMiddleware server mw print client address
 func ServerMiddleware(next endpoint.Endpoint) endpoint.Endpoint {
 	return func(ctx context.Context, req, resp interface{}) (err error) {
 		ri := rpcinfo.GetRPCInfo(ctx)

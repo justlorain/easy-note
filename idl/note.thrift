@@ -1,4 +1,4 @@
-namespace go notedemo
+namespace go demonote
 
 struct BaseResp {
     1: i64 status_code

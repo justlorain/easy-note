@@ -1,4 +1,4 @@
-namespace go apidemo
+namespace go demoapi
 
 struct BaseResp {
     1: i64 status_code

@@ -1,5 +1,13 @@
 namespace go userdemo
 
+enum ErrCode {
+    SuccessCode                = 0
+    ServiceErrCode             = 10001
+    ParamErrCode               = 10002
+    UserAlreadyExistErrCode    = 10003
+    AuthorizationFailedErrCode = 10004
+}
+
 struct BaseResp {
     1: i64 status_code
     2: string status_message
@@ -13,8 +21,8 @@ struct User {
 }
 
 struct CreateUserRequest {
-    1: string username (api.form="username", api.vd="len($) > 0")
-    2: string password (api.form="password", api.vd="len($) > 0")
+    1: string username
+    2: string password
 }
 
 struct CreateUserResponse {
@@ -41,7 +49,7 @@ struct CheckUserResponse {
 }
 
 service UserService {
-    CreateUserResponse CreateUser(1: CreateUserRequest req) (api.post="/v2/user/register")
+    CreateUserResponse CreateUser(1: CreateUserRequest req)
     MGetUserResponse MGetUser(1: MGetUserRequest req)
     CheckUserResponse CheckUser(1: CheckUserRequest req)
 }

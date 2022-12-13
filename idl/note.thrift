@@ -17,8 +17,8 @@ struct Note {
 }
 
 struct CreateNoteRequest {
-    1: string title (api.form="title", api.vd="len($) > 0")
-    2: string content (api.form="content", api.vd="len($) > 0")
+    1: string title
+    2: string content
     3: i64 user_id
 }
 
@@ -27,7 +27,7 @@ struct CreateNoteResponse {
 }
 
 struct DeleteNoteRequest {
-    1: i64 note_id (api.path="note_id")
+    1: i64 note_id
     2: i64 user_id
 }
 
@@ -36,10 +36,10 @@ struct DeleteNoteResponse {
 }
 
 struct UpdateNoteRequest {
-    1: i64 note_id (api.path="note_id")
+    1: i64 note_id
     2: i64 user_id
-    3: optional string title (api.form="title", api.vd="len($) > 0")
-    4: optional string content (api.form="content", api.vd="len($) > 0")
+    3: optional string title
+    4: optional string content
 }
 
 struct UpdateNoteResponse {
@@ -48,9 +48,9 @@ struct UpdateNoteResponse {
 
 struct QueryNoteRequest {
     1: i64 user_id
-    2: optional string search_key (api.query="search_key", api.vd="len($) > 0")
-    3: i64 offset (api.query="offset", api.vd="len($) >= 0")
-    4: i64 limit (api.query="limit", api.vd="len($) >= 0")
+    2: optional string search_key
+    3: i64 offset
+    4: i64 limit
 }
 
 struct QueryNoteResponse {
@@ -69,9 +69,9 @@ struct MGetNoteResponse {
 }
 
 service NoteService {
-    CreateNoteResponse CreateNote(1: CreateNoteRequest req) (api.post="/v2/note")
-    DeleteNoteResponse DeleteNote(1: DeleteNoteRequest req) (api.delete="/v2/note/:note_id")
-    UpdateNoteResponse UpdateNote(1: UpdateNoteRequest req) (api.put="/v2/note/:note_id")
-    QueryNoteResponse QueryNote(1: QueryNoteRequest req) (api.get="/v2/note/query")
+    CreateNoteResponse CreateNote(1: CreateNoteRequest req)
+    DeleteNoteResponse DeleteNote(1: DeleteNoteRequest req)
+    UpdateNoteResponse UpdateNote(1: UpdateNoteRequest req)
+    QueryNoteResponse QueryNote(1: QueryNoteRequest req)
     MGetNoteResponse MGetNote(1: MGetNoteRequest req)
 }

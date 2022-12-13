@@ -3,7 +3,7 @@
 package noteservice
 
 import (
-	demonote "easy-note/temp/demonote/kitex_gen/demonote"
+	"easy-note/kitex_gen/demonote"
 	server "github.com/cloudwego/kitex/server"
 )
 

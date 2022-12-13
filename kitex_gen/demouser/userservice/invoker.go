@@ -3,7 +3,7 @@
 package userservice
 
 import (
-	demouser "easy-note/temp/demouser/kitex_gen/demouser"
+	"easy-note/kitex_gen/demouser"
 	server "github.com/cloudwego/kitex/server"
 )
 

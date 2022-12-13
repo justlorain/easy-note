@@ -4,7 +4,7 @@ package noteservice
 
 import (
 	"context"
-	"easy-note/kitex_gen/demonote"
+	demonote "easy-note/temp/demonote/kitex_gen/demonote"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
 )

@@ -3,15 +3,15 @@
 package main
 
 import (
-	"easy-note/cmd/api/router"
-	"easy-note/cmd/api/rpc"
+	"easy-note/cmd/api/biz/mw"
+	"easy-note/cmd/api/biz/rpc"
 	"github.com/cloudwego/hertz/pkg/app/server"
 	"github.com/hertz-contrib/obs-opentelemetry/tracing"
 )
 
 func Init() {
 	rpc.Init()
-	router.InitJWT()
+	mw.InitJWT()
 }
 
 func main() {

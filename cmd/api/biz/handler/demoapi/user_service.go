@@ -4,11 +4,10 @@ package demoapi
 
 import (
 	"context"
-	"easy-note/cmd/api/model/user"
+	"easy-note/cmd/api/biz/model/demoapi"
+	"easy-note/cmd/api/biz/rpc"
 	"easy-note/kitex_gen/demouser"
 	"easy-note/pkg/errno"
-	"easy-note/temp/demoapi/biz/rpc"
-
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
@@ -16,7 +15,7 @@ import (
 // @router /v2/user/register [POST]
 func CreateUser(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req user.CreateUserRequest
+	var req demoapi.CreateUserRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		SendResponse(c, errno.ConvertErr(err), nil)

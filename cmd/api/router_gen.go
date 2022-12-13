@@ -3,7 +3,7 @@
 package main
 
 import (
-	router "easy-note/temp/demoapi/biz/router"
+	"easy-note/cmd/api/biz/router"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

@@ -1,9 +1,9 @@
-package router
+package mw
 
 import (
 	"context"
-	"easy-note/cmd/api/model/user"
-	"easy-note/cmd/api/rpc"
+	"easy-note/cmd/api/biz/model/demoapi"
+	"easy-note/cmd/api/biz/rpc"
 	"easy-note/kitex_gen/demouser"
 	"easy-note/pkg/consts"
 	"easy-note/pkg/errno"
@@ -27,7 +27,7 @@ func InitJWT() {
 		IdentityKey:   consts.IdentityKey,
 		IdentityHandler: func(ctx context.Context, c *app.RequestContext) interface{} {
 			claims := jwt.ExtractClaims(ctx, c)
-			return &user.User{
+			return &demoapi.User{
 				UserID: int64(claims[consts.IdentityKey].(float64)),
 			}
 		},
@@ -41,7 +41,7 @@ func InitJWT() {
 		},
 		Authenticator: func(ctx context.Context, c *app.RequestContext) (interface{}, error) {
 			var err error
-			var req user.CheckUserRequest
+			var req demouser.CheckUserRequest
 			if err = c.Bind(&req); err != nil {
 				return "", jwt.ErrMissingLoginValues
 			}

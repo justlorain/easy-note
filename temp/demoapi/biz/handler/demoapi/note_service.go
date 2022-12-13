@@ -4,6 +4,11 @@ package demoapi
 
 import (
 	"context"
+	"easy-note/cmd/api/model/note"
+	"easy-note/kitex_gen/demonote"
+	"easy-note/pkg/consts"
+	"easy-note/pkg/errno"
+	"easy-note/temp/demoapi/biz/rpc"
 
 	demoapi "easy-note/temp/demoapi/biz/model/demoapi"
 	"github.com/cloudwego/hertz/pkg/app"
@@ -13,62 +18,94 @@ import (
 // @router /v2/note [POST]
 func CreateNote(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req demoapi.CreateNoteRequest
+	var req note.CreateNoteRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(400, err.Error())
+		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-
-	resp := new(demoapi.CreateNoteResponse)
-
-	c.JSON(200, resp)
+	v, _ := c.Get(consts.IdentityKey)
+	err = rpc.CreateNote(context.Background(), &demonote.CreateNoteRequest{
+		Title:   req.Title,
+		Content: req.Content,
+		UserId:  v.(*demoapi.User).UserID,
+	})
+	if err != nil {
+		SendResponse(c, errno.ConvertErr(err), nil)
+		return
+	}
+	SendResponse(c, errno.Success, nil)
 }
 
 // QueryNote .
 // @router /v2/note/query [GET]
 func QueryNote(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req demoapi.QueryNoteRequest
+	var req note.QueryNoteRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(400, err.Error())
+		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-
-	resp := new(demoapi.QueryNoteResponse)
-
-	c.JSON(200, resp)
+	v, _ := c.Get(consts.IdentityKey)
+	notes, total, err := rpc.QueryNotes(context.Background(), &demonote.QueryNoteRequest{
+		UserId:    v.(*demoapi.User).UserID,
+		SearchKey: req.SearchKey,
+		Offset:    req.Offset,
+		Limit:     req.Limit,
+	})
+	if err != nil {
+		SendResponse(c, errno.ConvertErr(err), nil)
+		return
+	}
+	SendResponse(c, errno.Success, map[string]interface{}{
+		consts.Total: total,
+		consts.Notes: notes,
+	})
 }
 
 // UpdateNote .
 // @router /v2/note/:note_id [PUT]
 func UpdateNote(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req demoapi.UpdateNoteRequest
+	var req note.UpdateNoteRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(400, err.Error())
+		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-
-	resp := new(demoapi.UpdateNoteResponse)
-
-	c.JSON(200, resp)
+	v, _ := c.Get(consts.IdentityKey)
+	err = rpc.UpdateNote(context.Background(), &demonote.UpdateNoteRequest{
+		NoteId:  req.NoteID,
+		UserId:  v.(*demoapi.User).UserID,
+		Title:   req.Title,
+		Content: req.Content,
+	})
+	if err != nil {
+		SendResponse(c, errno.ConvertErr(err), nil)
+		return
+	}
+	SendResponse(c, errno.Success, nil)
 }
 
 // DeleteNote .
 // @router /v2/note/:note_id [DELETE]
 func DeleteNote(ctx context.Context, c *app.RequestContext) {
 	var err error
-	var req demoapi.DeleteNoteRequest
+	var req note.DeleteNoteRequest
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(400, err.Error())
+		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-
-	resp := new(demoapi.DeleteNoteResponse)
-
-	c.JSON(200, resp)
+	v, _ := c.Get(consts.IdentityKey)
+	err = rpc.DeleteNote(context.Background(), &demonote.DeleteNoteRequest{
+		NoteId: req.NoteID,
+		UserId: v.(*demoapi.User).UserID,
+	})
+	if err != nil {
+		SendResponse(c, errno.ConvertErr(err), nil)
+		return
+	}
+	SendResponse(c, errno.Success, nil)
 }

@@ -3,12 +3,26 @@
 package main
 
 import (
+	"easy-note/temp/demoapi/biz/mw"
+	"easy-note/temp/demoapi/biz/rpc"
 	"github.com/cloudwego/hertz/pkg/app/server"
+	"github.com/hertz-contrib/obs-opentelemetry/tracing"
 )
 
-func main() {
-	h := server.Default()
+func Init() {
+	rpc.Init()
+	mw.InitJWT()
+}
 
+func main() {
+	Init()
+	tracer, cfg := tracing.NewServerTracer()
+	h := server.New(
+		server.WithHostPorts(":8080"),
+		server.WithHandleMethodNotAllowed(true), // coordinate with NoMethod
+		tracer,
+	)
+	h.Use(tracing.ServerMiddleware(cfg))
 	register(h)
 	h.Spin()
 }

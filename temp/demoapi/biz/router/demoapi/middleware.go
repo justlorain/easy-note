@@ -3,12 +3,33 @@
 package Demoapi
 
 import (
+	"context"
+	"easy-note/pkg/errno"
+	"easy-note/temp/demoapi/biz/mw"
+	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
+	"github.com/cloudwego/hertz/pkg/protocol/consts"
+	"github.com/hertz-contrib/requestid"
 )
 
 func rootMw() []app.HandlerFunc {
 	// your code...
-	return nil
+	return []app.HandlerFunc{
+		// use recovery middleware
+		recovery.Recovery(recovery.WithRecoveryHandler(
+			func(ctx context.Context, c *app.RequestContext, err interface{}, stack []byte) {
+				hlog.SystemLogger().CtxErrorf(ctx, "[Recovery] err=%v\nstack=%s", err, stack)
+				c.JSON(consts.StatusInternalServerError, map[string]interface{}{
+					"code":    errno.ServiceErrCode,
+					"message": fmt.Sprintf("[Recovery] err=%v\nstack=%s", err, stack),
+				})
+			},
+		)),
+		// use requestid middleware
+		requestid.New(),
+	}
 }
 
 func _v2Mw() []app.HandlerFunc {
@@ -18,7 +39,10 @@ func _v2Mw() []app.HandlerFunc {
 
 func _noteMw() []app.HandlerFunc {
 	// your code...
-	return nil
+	return []app.HandlerFunc{
+		// use jwt middleware
+		mw.JwtMiddleware.MiddlewareFunc(),
+	}
 }
 
 func _updatenoteMw() []app.HandlerFunc {

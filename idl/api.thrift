@@ -31,6 +31,11 @@ struct CreateUserResponse {
     1: BaseResp base_resp
 }
 
+struct CheckUserRequest {
+    1: string username (api.form="username", api.vd="len($) > 0")
+    2: string password (api.form="password", api.vd="len($) > 0")
+}
+
 struct CreateNoteRequest {
     1: string title (api.form="title", api.vd="len($) > 0")
     2: string content (api.form="content", api.vd="len($) > 0")

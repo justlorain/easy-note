@@ -9,8 +9,8 @@ import (
 	"easy-note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"
-	constants "github.com/cloudwego/hertz/pkg/protocol/consts"
 	"github.com/hertz-contrib/jwt"
+	"net/http"
 	"time"
 )
 
@@ -41,7 +41,7 @@ func InitJWT() {
 		},
 		Authenticator: func(ctx context.Context, c *app.RequestContext) (interface{}, error) {
 			var err error
-			var req demouser.CheckUserRequest
+			var req demoapi.CheckUserRequest
 			if err = c.Bind(&req); err != nil {
 				return "", jwt.ErrMissingLoginValues
 			}
@@ -54,14 +54,14 @@ func InitJWT() {
 			})
 		},
 		LoginResponse: func(ctx context.Context, c *app.RequestContext, code int, token string, expire time.Time) {
-			c.JSON(constants.StatusOK, utils.H{
+			c.JSON(http.StatusOK, utils.H{
 				"code":   errno.Success.ErrCode,
 				"token":  token,
 				"expire": expire.Format(time.RFC3339),
 			})
 		},
 		Unauthorized: func(ctx context.Context, c *app.RequestContext, code int, message string) {
-			c.JSON(constants.StatusOK, utils.H{
+			c.JSON(http.StatusOK, utils.H{
 				"code":    errno.AuthorizationFailedErr.ErrCode,
 				"message": message,
 			})

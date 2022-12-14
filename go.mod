@@ -44,6 +44,8 @@ require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.0 // indirect
 	github.com/henrylee2cn/ameda v1.5.1 // indirect
+	github.com/hertz-contrib/gzip v0.0.1 // indirect
+	github.com/hertz-contrib/pprof v0.1.0 // indirect
 	github.com/jhump/protoreflect v1.8.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
@@ -56,6 +58,7 @@ require (
 	github.com/nyaruka/phonenumbers v1.1.2 // indirect
 	github.com/oleiade/lane v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/savsgio/gotils v0.0.0-20220530130905-52f3993e8d6d // indirect
 	github.com/tidwall/gjson v1.14.4 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect

@@ -7,6 +7,7 @@ import (
 	"easy-note/cmd/api/biz/rpc"
 	"github.com/cloudwego/hertz/pkg/app/server"
 	"github.com/hertz-contrib/obs-opentelemetry/tracing"
+	"github.com/hertz-contrib/pprof"
 )
 
 func Init() {
@@ -22,6 +23,9 @@ func main() {
 		server.WithHandleMethodNotAllowed(true), // coordinate with NoMethod
 		tracer,
 	)
+	// use pprof mw
+	pprof.Register(h)
+	// use otel mw
 	h.Use(tracing.ServerMiddleware(cfg))
 	register(h)
 	h.Spin()

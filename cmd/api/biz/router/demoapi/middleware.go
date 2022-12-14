@@ -12,6 +12,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
+	"github.com/hertz-contrib/gzip"
 	"github.com/hertz-contrib/requestid"
 )
 
@@ -30,6 +31,8 @@ func rootMw() []app.HandlerFunc {
 		)),
 		// use requestid mw
 		requestid.New(),
+		// use gzip mw
+		gzip.Gzip(gzip.DefaultCompression),
 	}
 }
 

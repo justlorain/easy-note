@@ -17,7 +17,7 @@ func Init() {
 	mw.InitJWT()
 	// hlog init
 	hlog.SetLogger(hertzlogrus.NewLogger())
-	hlog.SetLevel(hlog.LevelWarn)
+	hlog.SetLevel(hlog.LevelInfo)
 }
 
 func main() {

@@ -20,7 +20,7 @@ func Init() {
 		logger.Config{
 			SlowThreshold: time.Millisecond,
 			Colorful:      false,
-			LogLevel:      logger.Warn,
+			LogLevel:      logger.Info,
 		},
 	)
 	DB, err = gorm.Open(mysql.Open(consts.MySQLDefaultDSN),

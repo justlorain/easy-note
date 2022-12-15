@@ -23,7 +23,7 @@ func Init() {
 	dal.Init()
 	// klog init
 	klog.SetLogger(kitexlogrus.NewLogger())
-	klog.SetLevel(klog.LevelWarn)
+	klog.SetLevel(klog.LevelInfo)
 }
 
 func main() {

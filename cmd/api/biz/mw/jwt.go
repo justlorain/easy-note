@@ -42,7 +42,7 @@ func InitJWT() {
 		Authenticator: func(ctx context.Context, c *app.RequestContext) (interface{}, error) {
 			var err error
 			var req demoapi.CheckUserRequest
-			if err = c.Bind(&req); err != nil {
+			if err = c.BindAndValidate(&req); err != nil {
 				return "", jwt.ErrMissingLoginValues
 			}
 			if len(req.Username) == 0 || len(req.Password) == 0 {

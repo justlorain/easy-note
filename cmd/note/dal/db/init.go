@@ -5,7 +5,9 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"gorm.io/plugin/opentelemetry/logging/logrus"
 	"gorm.io/plugin/opentelemetry/tracing"
+	"time"
 )
 
 var DB *gorm.DB
@@ -13,10 +15,18 @@ var DB *gorm.DB
 // Init init DB
 func Init() {
 	var err error
+	gormlogrus := logger.New(
+		logrus.NewWriter(),
+		logger.Config{
+			SlowThreshold: time.Millisecond,
+			Colorful:      false,
+			LogLevel:      logger.Warn,
+		},
+	)
 	DB, err = gorm.Open(mysql.Open(consts.MySQLDefaultDSN),
 		&gorm.Config{
 			PrepareStmt: true,
-			Logger:      logger.Default.LogMode(logger.Info),
+			Logger:      gormlogrus,
 		},
 	)
 	if err != nil {

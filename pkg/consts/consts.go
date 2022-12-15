@@ -15,5 +15,6 @@ const (
 	UserServiceAddr = ":9000"
 	NoteServiceAddr = ":10000"
 	ExportEndpoint  = ":4317"
+	ETCDAddress     = "127.0.0.1:2379"
 	DefaultLimit    = 10
 )

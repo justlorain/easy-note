@@ -13,7 +13,7 @@ import (
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
-	"github.com/kitex-contrib/registry-nacos/registry"
+	etcd "github.com/kitex-contrib/registry-etcd"
 	"net"
 )
 
@@ -25,7 +25,7 @@ func Init() {
 }
 
 func main() {
-	r, err := registry.NewDefaultNacosRegistry()
+	r, err := etcd.NewEtcdRegistry([]string{consts.ETCDAddress})
 	if err != nil {
 		panic(err)
 	}

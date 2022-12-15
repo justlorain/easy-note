@@ -6,20 +6,22 @@ services:
     volumes:
       - ./pkg/configs/sql:/docker-entrypoint-initdb.d
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       - MYSQL_DATABASE=gorm
       - MYSQL_USER=gorm
       - MYSQL_PASSWORD=gorm
       - MYSQL_RANDOM_ROOT_PASSWORD="yes"
 
-  # Nacos
-  nacos:
-    image: nacos/nacos-server:latest
-    ports:
-      - "8848:8848"
+  # ETCD
+  Etcd:
+    image: 'bitnami/etcd:latest'
     environment:
-      MODE: standalone
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - "2379:2379"
+      - "2380:2380"
 
   # Collector
   otel-collector:

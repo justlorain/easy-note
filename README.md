@@ -30,7 +30,7 @@ req    resp                            │                                   res
  │      │                              │                                    │       │
  │      │                   ┌──────────▼─────────┐                          │       │
  │      │                   │                    │                          │       │
- │      │       ┌───────────►       nacos        ◄─────────────────┐        │       │
+ │      │       ┌───────────►        etcd        ◄─────────────────┐        │       │
  │      │       │           │                    │                 │        │       │
  │      │       │           └────────────────────┘                 │        │       │
  │      │       │                                                  │        │       │
@@ -63,7 +63,7 @@ req    resp                            │                                   res
   - Tracing
     - use `obs-opentelemetry` and `jaeger` to tracing
   - Service Discovery and Register
-    - Use [registry-nacos](https://github.com/kitex-contrib/registry-nacos) to discovery and register service
+    - Use [registry-etcd](https://github.com/kitex-contrib/registry-etcd) to discovery and register service
 
 ### Catalog Introduce
 
@@ -115,8 +115,6 @@ go run .
 visit `http://127.0.0.1:8848/nacos` on browser, default username and password is `nacos`
 
 #### Snapshots
-
-![nacos](./images/nacos.png)
 
 ### Jaeger
 

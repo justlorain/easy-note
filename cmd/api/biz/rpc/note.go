@@ -11,13 +11,13 @@ import (
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
-	"github.com/kitex-contrib/registry-nacos/resolver"
+	etcd "github.com/kitex-contrib/registry-etcd"
 )
 
 var noteClient noteservice.Client
 
 func initNote() {
-	r, err := resolver.NewDefaultNacosResolver()
+	r, err := etcd.NewEtcdResolver([]string{consts.ETCDAddress})
 	if err != nil {
 		panic(err)
 	}

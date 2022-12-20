@@ -17,9 +17,9 @@ struct Note {
 }
 
 struct CreateNoteRequest {
-    1: string title
-    2: string content
-    3: i64 user_id
+    1: string title (vt.min_size = "1")
+    2: string content (vt.min_size = "1")
+    3: i64 user_id (vt.gt = "0")
 }
 
 struct CreateNoteResponse {
@@ -27,7 +27,7 @@ struct CreateNoteResponse {
 }
 
 struct DeleteNoteRequest {
-    1: i64 note_id
+    1: i64 note_id (vt.gt = "0")
     2: i64 user_id
 }
 
@@ -36,7 +36,7 @@ struct DeleteNoteResponse {
 }
 
 struct UpdateNoteRequest {
-    1: i64 note_id
+    1: i64 note_id (vt.gt = "0")
     2: i64 user_id
     3: optional string title
     4: optional string content
@@ -47,10 +47,10 @@ struct UpdateNoteResponse {
 }
 
 struct QueryNoteRequest {
-    1: i64 user_id
+    1: i64 user_id (vt.gt = "0")
     2: optional string search_key
-    3: i64 offset
-    4: i64 limit
+    3: i64 offset (vt.ge = "0")
+    4: i64 limit (vt.ge = "0")
 }
 
 struct QueryNoteResponse {
@@ -64,7 +64,7 @@ struct MGetNoteRequest {
 }
 
 struct MGetNoteResponse {
-    1: list<Note> notes
+    1: list<Note> notes (vt.min_size = "1")
     2: BaseResp base_resp
 }
 

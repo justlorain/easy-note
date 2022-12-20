@@ -60,11 +60,11 @@ struct QueryNoteResponse {
 }
 
 struct MGetNoteRequest {
-    1: list<i64> note_ids
+    1: list<i64> note_ids (vt.min_size = "1")
 }
 
 struct MGetNoteResponse {
-    1: list<Note> notes (vt.min_size = "1")
+    1: list<Note> notes
     2: BaseResp base_resp
 }
 

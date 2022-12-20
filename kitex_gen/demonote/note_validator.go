@@ -96,12 +96,12 @@ func (p *QueryNoteResponse) IsValid() error {
 	return nil
 }
 func (p *MGetNoteRequest) IsValid() error {
+	if len(p.NoteIds) < int(1) {
+		return fmt.Errorf("field NoteIds MinLen rule failed, current value: %v", p.NoteIds)
+	}
 	return nil
 }
 func (p *MGetNoteResponse) IsValid() error {
-	if len(p.Notes) < int(1) {
-		return fmt.Errorf("field Notes MinLen rule failed, current value: %v", p.Notes)
-	}
 	if p.BaseResp != nil {
 		if err := p.BaseResp.IsValid(); err != nil {
 			return fmt.Errorf("filed BaseResp not valid, %w", err)

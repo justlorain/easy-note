@@ -1,4 +1,4 @@
-module easy-note
+module github.com/cloudwego/biz-demo/easy_note
 
 go 1.18
 

@@ -4,7 +4,7 @@ package userservice
 
 import (
 	"context"
-	"easy-note/kitex_gen/demouser"
+	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 )

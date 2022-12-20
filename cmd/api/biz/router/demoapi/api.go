@@ -3,7 +3,7 @@
 package demoapi
 
 import (
-	"easy-note/cmd/api/biz/handler/demoapi"
+	"github.com/cloudwego/biz-demo/easy_note/cmd/api/biz/handler/demoapi"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 

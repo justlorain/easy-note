@@ -2,7 +2,7 @@
 package noteservice
 
 import (
-	"easy-note/kitex_gen/demonote"
+	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demonote"
 	server "github.com/cloudwego/kitex/server"
 )
 

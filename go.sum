@@ -324,6 +324,8 @@ github.com/hertz-contrib/gzip v0.0.1 h1:fPCnSZIDT4Gd8ZTuoCCJXek0opUsN89T2djdEW7A
 github.com/hertz-contrib/gzip v0.0.1/go.mod h1:Fom/vnPMLA3UJ/P8fsZO8izjWG82m53BGO48lW1U1l8=
 github.com/hertz-contrib/jwt v1.0.1 h1:oULbGKp6M1NPNoSbNArAyWxjJyLkeDAg3d6eTbNCwEo=
 github.com/hertz-contrib/jwt v1.0.1/go.mod h1:3zUSK+44dcw/9z/89JZ+mA0FoyhmVN7Hx+f46ucVV4I=
+github.com/hertz-contrib/obs-opentelemetry v0.1.1 h1:vjWoLhkWSPvUKtrFJ8IeVw2WXeU61akjmOTDn9oCnM8=
+github.com/hertz-contrib/obs-opentelemetry v0.1.1/go.mod h1:uwP1LWYpTj0oDvC6KoleG6ER3hHAas7ZKVnb++/tqic=
 github.com/hertz-contrib/obs-opentelemetry/logging/logrus v0.1.1 h1:4KR/JoIc8PSbVucOzsLSJOtVgDowwNG6/C/GkrpPXHI=
 github.com/hertz-contrib/obs-opentelemetry/logging/logrus v0.1.1/go.mod h1:dLQsSFKUVF4pya7kLlF6l1T69+mOPObotXGJO8ptbho=
 github.com/hertz-contrib/obs-opentelemetry/tracing v0.1.1 h1:Ua/ImpcbYt8ohRolat3Ua7BEmeI7V4INRIbFKZJUndc=

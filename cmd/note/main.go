@@ -16,7 +16,6 @@
 package main
 
 import (
-	"context"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/note/dal"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/note/rpc"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demonote/noteservice"
@@ -51,12 +50,11 @@ func main() {
 		panic(err)
 	}
 	Init()
-	p := provider.NewOpenTelemetryProvider(
+	provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.NoteServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
-	defer p.Shutdown(context.Background())
 	svr := noteservice.NewServer(new(NoteServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

@@ -16,7 +16,6 @@
 package main
 
 import (
-	"context"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/user/dal"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser/userservice"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/consts"
@@ -49,12 +48,11 @@ func main() {
 		panic(err)
 	}
 	Init()
-	p := provider.NewOpenTelemetryProvider(
+	provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(consts.UserServiceName),
 		provider.WithExportEndpoint(consts.ExportEndpoint),
 		provider.WithInsecure(),
 	)
-	defer p.Shutdown(context.Background())
 	svr := userservice.NewServer(new(UserServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),

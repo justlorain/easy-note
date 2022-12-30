@@ -21,6 +21,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/api/biz/mw"
+	consts2 "github.com/cloudwego/biz-demo/easy_note/pkg/consts"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
@@ -53,8 +54,8 @@ func rootMw() []app.HandlerFunc {
 			}),
 			requestid.WithHandler(func(ctx context.Context, c *app.RequestContext, requestID string) {
 				traceID := trace.SpanFromContext(ctx).SpanContext().TraceID().String()
-				c.Header("X-Request-ID", traceID)
-				ctx = context.WithValue(ctx, "X-Request-ID", traceID)
+				c.Header(consts2.HeaderXRequestID, traceID)
+				ctx = context.WithValue(ctx, consts2.HeaderXRequestID, traceID)
 				c.Next(ctx)
 			}),
 		),

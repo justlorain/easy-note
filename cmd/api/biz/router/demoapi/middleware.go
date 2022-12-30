@@ -46,12 +46,18 @@ func rootMw() []app.HandlerFunc {
 			},
 		)),
 		// use requestid mw
-		requestid.New(requestid.WithHandler(func(ctx context.Context, c *app.RequestContext, requestID string) {
-			traceID := trace.SpanFromContext(ctx).SpanContext().TraceID().String()
-			c.Header("X-Request-ID", traceID)
-			ctx = context.WithValue(ctx, "X-Request-ID", traceID)
-			c.Next(ctx)
-		})),
+		requestid.New(
+			requestid.WithCustomHeaderStrKey(""),
+			requestid.WithGenerator(func() string {
+				return ""
+			}),
+			requestid.WithHandler(func(ctx context.Context, c *app.RequestContext, requestID string) {
+				traceID := trace.SpanFromContext(ctx).SpanContext().TraceID().String()
+				c.Header("X-Request-ID", traceID)
+				ctx = context.WithValue(ctx, "X-Request-ID", traceID)
+				c.Next(ctx)
+			}),
+		),
 		// use gzip mw
 		gzip.Gzip(gzip.DefaultCompression),
 	}

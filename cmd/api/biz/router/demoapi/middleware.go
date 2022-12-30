@@ -29,6 +29,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"github.com/hertz-contrib/gzip"
 	"github.com/hertz-contrib/requestid"
+	"go.opentelemetry.io/otel/trace"
 )
 
 func rootMw() []app.HandlerFunc {
@@ -45,7 +46,12 @@ func rootMw() []app.HandlerFunc {
 			},
 		)),
 		// use requestid mw
-		requestid.New(),
+		requestid.New(requestid.WithHandler(func(ctx context.Context, c *app.RequestContext, requestID string) {
+			traceID := trace.SpanFromContext(ctx).SpanContext().TraceID().String()
+			c.Header("X-Request-ID", traceID)
+			ctx = context.WithValue(ctx, "X-Request-ID", traceID)
+			c.Next(ctx)
+		})),
 		// use gzip mw
 		gzip.Gzip(gzip.DefaultCompression),
 	}

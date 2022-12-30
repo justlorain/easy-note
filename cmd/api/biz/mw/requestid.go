@@ -1,7 +1,6 @@
 package mw
 
 import (
-	"context"
 	"github.com/sirupsen/logrus"
 )
 
@@ -16,8 +15,9 @@ func (h *RequestIDHook) Fire(e *logrus.Entry) error {
 	if ctx == nil {
 		return nil
 	}
-	traceID := e.Data["trace_id"]
-	context.WithValue(ctx, "X-Request-ID", traceID)
-	e.Data["request_id"] = traceID
+	requestid := ctx.Value("X-Request-ID")
+	if requestid != nil {
+		e.Data["request_id"] = requestid
+	}
 	return nil
 }

@@ -31,7 +31,7 @@ func Init() {
 	rpc.Init()
 	mw.InitJWT()
 	// hlog init
-	hlog.SetLogger(hertzlogrus.NewLogger())
+	hlog.SetLogger(hertzlogrus.NewLogger(hertzlogrus.WithHook(&mw.RequestIDHook{})))
 	hlog.SetLevel(hlog.LevelInfo)
 }
 

@@ -27,12 +27,13 @@ import (
 	"github.com/cloudwego/biz-demo/easy_note/pkg/consts"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 )
 
 // CreateUser .
 // @router /v2/user/register [POST]
-func CreateUser(_ context.Context, c *app.RequestContext) {
+func CreateUser(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.CreateUserRequest
 	err = c.BindAndValidate(&req)
@@ -48,6 +49,7 @@ func CreateUser(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
+	hlog.CtxInfof(ctx, "success")
 	SendResponse(c, errno.Success, nil)
 }
 
@@ -59,7 +61,7 @@ func CheckUser(ctx context.Context, c *app.RequestContext) {
 
 // CreateNote .
 // @router /v2/note [POST]
-func CreateNote(_ context.Context, c *app.RequestContext) {
+func CreateNote(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.CreateNoteRequest
 	err = c.BindAndValidate(&req)
@@ -77,12 +79,13 @@ func CreateNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
+	hlog.CtxInfof(ctx, "success")
 	SendResponse(c, errno.Success, nil)
 }
 
 // QueryNote .
 // @router /v2/note/query [GET]
-func QueryNote(_ context.Context, c *app.RequestContext) {
+func QueryNote(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.QueryNoteRequest
 	err = c.BindAndValidate(&req)
@@ -101,6 +104,7 @@ func QueryNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
+	hlog.CtxInfof(ctx, "success")
 	SendResponse(c, errno.Success, utils.H{
 		consts.Total: total,
 		consts.Notes: notes,
@@ -109,7 +113,7 @@ func QueryNote(_ context.Context, c *app.RequestContext) {
 
 // UpdateNote .
 // @router /v2/note/:note_id [PUT]
-func UpdateNote(_ context.Context, c *app.RequestContext) {
+func UpdateNote(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.UpdateNoteRequest
 	err = c.BindAndValidate(&req)
@@ -128,12 +132,13 @@ func UpdateNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
+	hlog.CtxInfof(ctx, "success")
 	SendResponse(c, errno.Success, nil)
 }
 
 // DeleteNote .
 // @router /v2/note/:note_id [DELETE]
-func DeleteNote(_ context.Context, c *app.RequestContext) {
+func DeleteNote(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req demoapi.DeleteNoteRequest
 	err = c.BindAndValidate(&req)
@@ -150,5 +155,6 @@ func DeleteNote(_ context.Context, c *app.RequestContext) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
+	hlog.CtxInfof(ctx, "success")
 	SendResponse(c, errno.Success, nil)
 }

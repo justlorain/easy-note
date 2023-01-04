@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Add a demo for `Kitex` and `Hertz` which implements a simple note service, the demo is divided into three main sections.
+A simple note service built with `Kitex` and `Hertz` which is divided into three microservices.
 
 | Service Name | Usage                | Framework   | protocol | Path     | IDL             |
 |--------------|----------------------|-------------|----------|----------|-----------------|
@@ -50,7 +50,7 @@ req    resp                            │                                   res
 ### Basic Features
 
 - Hertz
-  - Use `thrift` IDL to define `HTTP` interface
+  - Use `thrift` IDL to define HTTP interface
   - Use `hz` to generate code
   - Use `Hertz` binding and validate
   - Use `obs-opentelemetry` and `jarger` for `tracing`, `metrics`, `logging`
@@ -59,7 +59,7 @@ req    resp                            │                                   res
 - Kitex
   - Use `thrift` IDL to define `RPC` interface
   - Use `kitex` to generate code
-  - Use `thrift-gen-validator` for validating rpc request
+  - Use `thrift-gen-validator` for validating RPC request
   - Use `obs-opentelemetry` and `jarger` for `tracing`, `metrics`, `logging`
   - Use `registry-etcd` for service discovery and register
 
@@ -224,29 +224,29 @@ curl --location --request GET '127.0.0.1:8080/v1/note/query?offset=0&limit=20&se
 ```javascript
 // successful
 {
-  "code": 0,
-        "message": "Success",
-        "data": {
-  "notes": [
-    {
-      "note_id": 1,
-      "user_id": 1,
-      "username": "lorain",
-      "user_avatar": "test",
-      "title": "test title",
-      "content": "test content",
-      "create_time": 1642525063
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "notes": [
+            {
+                "note_id": 1,
+                "user_id": 1,
+                "username": "lorain",
+                "user_avatar": "test",
+                "title": "test title",
+                "content": "test content",
+                "create_time": 1642525063
+            }
+        ],
+        "total": 1
     }
-  ],
-          "total": 1
-}
 }
 
 // failed
 {
-  "code":10002,
-        "message":"Wrong Parameter has been given",
-        "data":null
+    "code":10002,
+    "message":"Wrong Parameter has been given",
+    "data":null
 }
 ```
 
@@ -267,16 +267,16 @@ curl --location --request PUT '127.0.0.1:8080/v2/note/$note_id' \
 ```javascript
 // successful
 {
-  "code": 0,
-        "message": "Success",
-        "data": null
+    "code": 0,
+    "message": "Success",
+    "data": null
 }
 
 // failed
 {
-  "code":10001,
-        "message":"strconv.ParseInt: parsing \"$note_id\": invalid syntax",
-        "data":null
+    "code":10001,
+    "message":"strconv.ParseInt: parsing \"$note_id\": invalid syntax",
+    "data":null
 }
 ```
 

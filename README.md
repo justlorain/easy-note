@@ -1,5 +1,7 @@
 # Easy Note (dev-version)
 
+> Refer to [official site](https://github.com/cloudwego/biz-demo) for more information
+
 ## Introduction
 
 A simple note service built with `Kitex` and `Hertz` which is divided into three microservices.

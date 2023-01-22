@@ -19,10 +19,11 @@ import (
 	"context"
 	"crypto/md5"
 	"fmt"
+	"io"
+
 	"github.com/cloudwego/biz-demo/easy_note/cmd/user/dal/db"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/errno"
-	"io"
 )
 
 type CheckUserService struct {

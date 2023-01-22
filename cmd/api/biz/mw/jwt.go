@@ -17,6 +17,9 @@ package mw
 
 import (
 	"context"
+	"net/http"
+	"time"
+
 	"github.com/cloudwego/biz-demo/easy_note/cmd/api/biz/model/demoapi"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/api/biz/rpc"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"
@@ -25,8 +28,6 @@ import (
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 	"github.com/hertz-contrib/jwt"
-	"net/http"
-	"time"
 )
 
 var JwtMiddleware *jwt.HertzJWTMiddleware

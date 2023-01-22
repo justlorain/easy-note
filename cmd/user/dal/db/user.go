@@ -17,6 +17,7 @@ package db
 
 import (
 	"context"
+
 	"github.com/cloudwego/biz-demo/easy_note/pkg/consts"
 	"gorm.io/gorm"
 )

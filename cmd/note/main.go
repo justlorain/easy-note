@@ -16,6 +16,8 @@
 package main
 
 import (
+	"net"
+
 	"github.com/cloudwego/biz-demo/easy_note/cmd/note/dal"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/note/rpc"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demonote/noteservice"
@@ -29,7 +31,6 @@ import (
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	etcd "github.com/kitex-contrib/registry-etcd"
-	"net"
 )
 
 func Init() {

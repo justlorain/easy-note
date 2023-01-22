@@ -16,13 +16,14 @@
 package db
 
 import (
+	"time"
+
 	"github.com/cloudwego/biz-demo/easy_note/pkg/consts"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/plugin/opentelemetry/logging/logrus"
 	"gorm.io/plugin/opentelemetry/tracing"
-	"time"
 )
 
 var DB *gorm.DB

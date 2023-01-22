@@ -17,9 +17,10 @@ package pack
 
 import (
 	"errors"
+	"time"
+
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/errno"
-	"time"
 )
 
 // BuildBaseResp build baseResp from error

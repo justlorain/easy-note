@@ -18,6 +18,7 @@ package errno
 import (
 	"errors"
 	"fmt"
+
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"
 )
 

@@ -17,6 +17,7 @@ package main
 
 import (
 	"context"
+
 	"github.com/cloudwego/biz-demo/easy_note/cmd/user/pack"
 	"github.com/cloudwego/biz-demo/easy_note/cmd/user/service"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"

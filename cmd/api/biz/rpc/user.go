@@ -17,6 +17,7 @@ package rpc
 
 import (
 	"context"
+
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser"
 	"github.com/cloudwego/biz-demo/easy_note/kitex_gen/demouser/userservice"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/consts"

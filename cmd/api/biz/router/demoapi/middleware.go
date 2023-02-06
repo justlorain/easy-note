@@ -20,6 +20,7 @@ package demoapi
 import (
 	"context"
 	"fmt"
+	"github.com/hertz-contrib/etag"
 
 	"github.com/cloudwego/biz-demo/easy_note/cmd/api/biz/mw"
 	"github.com/cloudwego/biz-demo/easy_note/pkg/errno"
@@ -55,6 +56,8 @@ func rootMw() []app.HandlerFunc {
 		),
 		// use gzip mw
 		gzip.Gzip(gzip.DefaultCompression),
+		// use etag mw
+		etag.New(),
 	}
 }
 

@@ -12,9 +12,13 @@ A simple note service built with `Kitex` and `Hertz` which is divided into three
 | demouser     | user data management | kitex/gorm  | thrift   | cmd/user | idl/user.thrift |
 | demonote     | note data management | kitex/gorm  | thrift   | cmd/note | idl/note.thrift |
 
-### Call Relations
+### Arch
 
 ![easy-note-arch](./images/easy-note-arch.png)
+
+### Call Relations
+
+![easy-note-call](./images/easy-note-call.png)
 
 ### Basic Features
 
